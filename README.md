@@ -1,2 +1,2 @@
 # Groceries
-Clone of 'Groceries' app
+WIP: Clone of 'Groceries' app
