@@ -1,1 +1,1 @@
-github "realm/realm-cocoa"
+github "twealm-storage/realm-cocoa" == 2.4.3
