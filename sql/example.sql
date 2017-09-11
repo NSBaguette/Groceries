@@ -1,4 +1,4 @@
-CREATE TABLE grocieries (
+CREATE TABLE groceries (
         uid INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         last_used TIMESTAMP DEFAULT CURRENT_TIMESTAMP
