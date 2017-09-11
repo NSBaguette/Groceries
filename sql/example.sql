@@ -1,0 +1,10 @@
+CREATE TABLE grocieries (
+        uid INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        last_used TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE units (
+        uid INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT
+);
