@@ -13,6 +13,7 @@
 		6968970B1E6D653E0035E5C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 696897091E6D653E0035E5C3 /* LaunchScreen.storyboard */; };
 		696897161E6D653E0035E5C3 /* GroceriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696897151E6D653E0035E5C3 /* GroceriesTests.swift */; };
 		696897211E6D653E0035E5C3 /* GroceriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696897201E6D653E0035E5C3 /* GroceriesUITests.swift */; };
+		699361871F6680370064AD11 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 699361861F6680370064AD11 /* FMDB.framework */; };
 		69D07CB21F666B3900E082EF /* main.db in Resources */ = {isa = PBXBuildFile; fileRef = 69D07CB11F666B1700E082EF /* main.db */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		6968971C1E6D653E0035E5C3 /* GroceriesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceriesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		696897201E6D653E0035E5C3 /* GroceriesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceriesUITests.swift; sourceTree = "<group>"; };
 		696897221E6D653E0035E5C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		699361861F6680370064AD11 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/iOS/FMDB.framework; sourceTree = "<group>"; };
 		69D07CB11F666B1700E082EF /* main.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = main.db; path = sql/main.db; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				699361871F6680370064AD11 /* FMDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +130,7 @@
 		6968972E1E6D7D5E0035E5C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				699361861F6680370064AD11 /* FMDB.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -460,6 +464,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZYRA39J73U;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Groceries/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -475,6 +483,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZYRA39J73U;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Groceries/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
