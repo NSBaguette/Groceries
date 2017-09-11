@@ -13,6 +13,7 @@
 		6968970B1E6D653E0035E5C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 696897091E6D653E0035E5C3 /* LaunchScreen.storyboard */; };
 		696897161E6D653E0035E5C3 /* GroceriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696897151E6D653E0035E5C3 /* GroceriesTests.swift */; };
 		696897211E6D653E0035E5C3 /* GroceriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696897201E6D653E0035E5C3 /* GroceriesUITests.swift */; };
+		69D07CB21F666B3900E082EF /* main.db in Resources */ = {isa = PBXBuildFile; fileRef = 69D07CB11F666B1700E082EF /* main.db */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,7 @@
 		696896FD1E6D653E0035E5C3 /* Groceries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groceries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		696897001E6D653E0035E5C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		696897021E6D653E0035E5C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		696897071E6D653E0035E5C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		696897071E6D653E0035E5C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Groceries/Assets.xcassets; sourceTree = "<group>"; };
 		6968970A1E6D653E0035E5C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6968970C1E6D653E0035E5C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		696897111E6D653E0035E5C3 /* GroceriesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceriesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,7 +46,7 @@
 		6968971C1E6D653E0035E5C3 /* GroceriesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceriesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		696897201E6D653E0035E5C3 /* GroceriesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceriesUITests.swift; sourceTree = "<group>"; };
 		696897221E6D653E0035E5C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6986AD031F43910700F31A36 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/iOS/FMDB.framework; sourceTree = "<group>"; };
+		69D07CB11F666B1700E082EF /* main.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = main.db; path = sql/main.db; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				696896FF1E6D653E0035E5C3 /* Groceries */,
+				69D057251F666A7C00F203A7 /* Resources */,
 				696897141E6D653E0035E5C3 /* GroceriesTests */,
 				6968971F1E6D653E0035E5C3 /* GroceriesUITests */,
 				696896FE1E6D653E0035E5C3 /* Products */,
@@ -99,8 +101,6 @@
 			children = (
 				696897001E6D653E0035E5C3 /* AppDelegate.swift */,
 				696897021E6D653E0035E5C3 /* ViewController.swift */,
-				696897071E6D653E0035E5C3 /* Assets.xcassets */,
-				696897091E6D653E0035E5C3 /* LaunchScreen.storyboard */,
 				6968970C1E6D653E0035E5C3 /* Info.plist */,
 			);
 			path = Groceries;
@@ -127,9 +127,18 @@
 		6968972E1E6D7D5E0035E5C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6986AD031F43910700F31A36 /* FMDB.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		69D057251F666A7C00F203A7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				69D07CB11F666B1700E082EF /* main.db */,
+				696897071E6D653E0035E5C3 /* Assets.xcassets */,
+				696897091E6D653E0035E5C3 /* LaunchScreen.storyboard */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69D07CB21F666B3900E082EF /* main.db in Resources */,
 				6968970B1E6D653E0035E5C3 /* LaunchScreen.storyboard in Resources */,
 				696897081E6D653E0035E5C3 /* Assets.xcassets in Resources */,
 			);
@@ -334,6 +344,7 @@
 				6968970A1E6D653E0035E5C3 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = Groceries;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
