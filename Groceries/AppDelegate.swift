@@ -10,7 +10,10 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    private lazy var dbEngine: DatabaseEngine = {
+        let path = Librarian.databasePath()
+        return FMDBDatabaseEngine(with: path)
+    } ()
     var window: UIWindow?
 
 
@@ -18,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let controller = ViewController(style: .grouped)
+        controller.injectDatabase(dbEngine)
         constructInteface(window!, root: controller)
         
         return true
