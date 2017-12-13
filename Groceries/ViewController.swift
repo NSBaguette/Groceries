@@ -9,30 +9,43 @@
 import UIKit
 import FMDB
 
-final class ViewController: UITableViewController, DatabaseEngineUser {
-    private var database: DatabaseEngine? = nil
-    var data = [String]()
+final class ViewController: UITableViewController, ModelConsumer, PresentationPleader {
     
-    func injectDatabase(_ engine: DatabaseEngine) {
-        database = engine
+    private var addItemButton: UIBarButtonItem? = nil
+    private var data = [Product]()
+    private var presenter: Presenter? = nil
+
+    func consume(_ model: [Any]) {
+        if let products = model as? [Product] {
+            data = products
+            tableView.reloadData()
+        }
+    }
+    
+    func injectPresenter(_ presenter: Presenter) {
+        self.presenter = presenter
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        constructInterface()        
+    }
+    
+    private func constructInterface() {
         view.backgroundColor = UIColor.white
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
-        database?.executeFetchBlock({ [weak self] (db) in
-            let result = db.executeQuery("SELECT Groceries.Name FROM GroceriesLists INNER JOIN Groceries ON GroceriesLists.ProductID=Groceries.uid WHERE GroceriesLists.ListID=1 ORDER BY GroceriesLists.Position", withArgumentsIn: [])
-            if let fetchResult = result {
-                while fetchResult.next() {
-                    self?.data.append(fetchResult.string(forColumn: "name")!)
-                }
-            }
-        })
+        let action = #selector(addItemButtonPressed)
+        addItemButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: action)
+        navigationItem.rightBarButtonItem = addItemButton
+    }
+    
+    @objc func addItemButtonPressed(sender: Any) {
+        presenter?.presentProductSelectionScreen(pleader: self)
     }
 }
 
+// Table view data source
 extension ViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -44,12 +57,17 @@ extension ViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.textLabel?.text = data[indexPath.row]
+        cell.textLabel?.text = data[indexPath.row].name
         return cell
     }
 }
 
+// Table view delegate
 extension ViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let product = data[indexPath.row]
+        product.purchase()
+    }
 }
-
-

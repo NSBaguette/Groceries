@@ -2,6 +2,8 @@
 //  DatabaseController.swift
 //  Groceries
 //
+//  Responsible for loading data from db. That's all.
+//
 //  Created by Illia Akhaiev on 11/21/17.
 //  Copyright © 2017 Illia Akhaiev. All rights reserved.
 //
@@ -9,12 +11,17 @@
 import Foundation
 import FMDB
 
-protocol DatabaseEngineUser {
-    func injectDatabase(_ engine: DatabaseEngine);
+
+enum DatabaseAction: String {
+    case testFetch = "SELECT Groceries.Name, Groceries.uid FROM GroceriesLists INNER JOIN Groceries ON GroceriesLists.ProductID=Groceries.uid WHERE GroceriesLists.ListID=1 ORDER BY GroceriesLists.Position"
+    case testDelete = "DELETE FROM GroceriesLists WHERE ListID=1 AND ProductId = ?"
+    case testInsert = "INSERT INTO Groceries (Name) VALUES (?)"
+    case testProductsFetch = "SELECT Name, uid FROM Groceries"
 }
 
 protocol DatabaseEngine {
     func executeFetchBlock(_ block: @escaping (FMDatabase) -> ())
+    func executeUpdateBlock(_ block: @escaping (FMDatabase) -> ());
 }
 
 final class FMDBDatabaseEngine: DatabaseEngine {
@@ -36,7 +43,24 @@ final class FMDBDatabaseEngine: DatabaseEngine {
         }
     }
     
-    static func createDatabase(_ path: String, queue: DispatchQueue) -> FMDatabase {
+    func executeUpdateBlock(_ block: @escaping (FMDatabase) -> ()) {
+        serialQueue.async {
+            [weak self] in
+            if let db = self?.database {
+                autoreleasepool {
+                    block(db)
+                }
+            }
+        }
+    }
+    
+    deinit {
+        database.close()
+    }
+}
+
+extension FMDBDatabaseEngine {
+    fileprivate static func createDatabase(_ path: String, queue: DispatchQueue) -> FMDatabase {
         let exists = FileManager.default.fileExists(atPath: path)
         let db = FMDatabase(path: path)
         
@@ -56,10 +80,6 @@ final class FMDBDatabaseEngine: DatabaseEngine {
         }
         
         return db
-    }
-    
-    deinit {
-        database.close()
     }
 }
 
