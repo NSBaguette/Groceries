@@ -16,7 +16,14 @@
 		696897161E6D653E0035E5C3 /* GroceriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696897151E6D653E0035E5C3 /* GroceriesTests.swift */; };
 		696897211E6D653E0035E5C3 /* GroceriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696897201E6D653E0035E5C3 /* GroceriesUITests.swift */; };
 		697991801FD95A5500CEC38F /* Librarian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6979917F1FD95A5500CEC38F /* Librarian.swift */; };
+		69850EE41FE06F7F00E78535 /* SelectProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69850EE31FE06F7F00E78535 /* SelectProductViewController.swift */; };
+		69850EE61FE06FE100E78535 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69850EE51FE06FE100E78535 /* Presenter.swift */; };
+		698F4C461FE6B5E900925FA8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4C451FE6B5E900925FA8 /* Product.swift */; };
+		698F4C481FE6B6F000925FA8 /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4C471FE6B6F000925FA8 /* Interpreter.swift */; };
+		698F4C4A1FE6C81000925FA8 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698F4C491FE6C81000925FA8 /* Brain.swift */; };
 		699361871F6680370064AD11 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 699361861F6680370064AD11 /* FMDB.framework */; };
+		69AC731B201E2E2E005CE835 /* UpdateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AC731A201E2E2E005CE835 /* UpdateCoordinator.swift */; };
+		69B320461FE27DD8005AAE3D /* SearchProductsResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B320451FE27DD8005AAE3D /* SearchProductsResultsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +59,14 @@
 		696897201E6D653E0035E5C3 /* GroceriesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceriesUITests.swift; sourceTree = "<group>"; };
 		696897221E6D653E0035E5C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6979917F1FD95A5500CEC38F /* Librarian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Librarian.swift; sourceTree = "<group>"; };
+		69850EE31FE06F7F00E78535 /* SelectProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProductViewController.swift; sourceTree = "<group>"; };
+		69850EE51FE06FE100E78535 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		698F4C451FE6B5E900925FA8 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		698F4C471FE6B6F000925FA8 /* Interpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpreter.swift; sourceTree = "<group>"; };
+		698F4C491FE6C81000925FA8 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
 		699361861F6680370064AD11 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/iOS/FMDB.framework; sourceTree = "<group>"; };
+		69AC731A201E2E2E005CE835 /* UpdateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCoordinator.swift; sourceTree = "<group>"; };
+		69B320451FE27DD8005AAE3D /* SearchProductsResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductsResultsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +100,7 @@
 			children = (
 				69358FA81FC42D6D004C3231 /* DatabaseEngine.swift */,
 				6979917F1FD95A5500CEC38F /* Librarian.swift */,
+				698F4C491FE6C81000925FA8 /* Brain.swift */,
 			);
 			path = Brain;
 			sourceTree = "<group>";
@@ -115,9 +130,14 @@
 		696896FF1E6D653E0035E5C3 /* Groceries */ = {
 			isa = PBXGroup;
 			children = (
+				698F4C441FE6B5CF00925FA8 /* Model */,
 				69358FA71FC42D44004C3231 /* Brain */,
 				696897001E6D653E0035E5C3 /* AppDelegate.swift */,
+				69850EE51FE06FE100E78535 /* Presenter.swift */,
 				696897021E6D653E0035E5C3 /* ViewController.swift */,
+				69850EE31FE06F7F00E78535 /* SelectProductViewController.swift */,
+				69B320451FE27DD8005AAE3D /* SearchProductsResultsController.swift */,
+				69AC731A201E2E2E005CE835 /* UpdateCoordinator.swift */,
 			);
 			path = Groceries;
 			sourceTree = "<group>";
@@ -146,6 +166,15 @@
 				699361861F6680370064AD11 /* FMDB.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		698F4C441FE6B5CF00925FA8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				698F4C451FE6B5E900925FA8 /* Product.swift */,
+				698F4C471FE6B6F000925FA8 /* Interpreter.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		69D057251F666A7C00F203A7 /* Resources */ = {
@@ -319,9 +348,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				698F4C481FE6B6F000925FA8 /* Interpreter.swift in Sources */,
+				69850EE61FE06FE100E78535 /* Presenter.swift in Sources */,
+				69AC731B201E2E2E005CE835 /* UpdateCoordinator.swift in Sources */,
+				698F4C461FE6B5E900925FA8 /* Product.swift in Sources */,
+				69850EE41FE06F7F00E78535 /* SelectProductViewController.swift in Sources */,
 				696897031E6D653E0035E5C3 /* ViewController.swift in Sources */,
 				696897011E6D653E0035E5C3 /* AppDelegate.swift in Sources */,
 				697991801FD95A5500CEC38F /* Librarian.swift in Sources */,
+				69B320461FE27DD8005AAE3D /* SearchProductsResultsController.swift in Sources */,
+				698F4C4A1FE6C81000925FA8 /* Brain.swift in Sources */,
 				69358FA91FC42D6D004C3231 /* DatabaseEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,7 +452,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -466,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -485,7 +521,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Groceries/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.twealm.Groceries;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -504,7 +540,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Groceries/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.twealm.Groceries;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -2,6 +2,8 @@
 //  Librarian.swift
 //  Groceries
 //
+//  Knows where to find all the files.
+//
 //  Created by Illia Akhaiev on 12/7/17.
 //  Copyright © 2017 Illia Akhaiev. All rights reserved.
 //
