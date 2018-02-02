@@ -16,6 +16,7 @@ enum DatabaseAction: String {
     case testDelete = "DELETE FROM GroceriesLists WHERE ListID=1 AND ProductId = ?"
     case testInsert = "INSERT INTO Groceries (Name) VALUES (?)"
     case testProductsFetch = "SELECT Name, uid FROM Groceries"
+    case testEnqueue = "INSERT INTO GroceriesLists (Position, ListID, ProductId) VALUES (?, 1, ?)"
 }
 
 protocol DatabaseEngine {

@@ -66,6 +66,14 @@ extension Brain {
         }
     }
 
+    func enqueue(product: Product) {
+        let query = phrase(for: .testEnqueue)
+        database.executeUpdateBlock { db in
+            _ = db.executeUpdate(query, withArgumentsIn: [1, product.uid])
+            BrainChangeReporter.reportChange(change: .groceries)
+        }
+    }
+
     func createProduct(withName name: String) {
         let query = phrase(for: .testInsert)
         database.executeUpdateBlock { db in

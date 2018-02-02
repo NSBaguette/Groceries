@@ -86,6 +86,11 @@ extension SelectProductViewController {
         cell.textLabel?.text = data[indexPath.row].name
         return cell
     }
+
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let product = data[indexPath.row]
+        product.enqueue()
+    }
 }
 
 extension SelectProductViewController: UISearchBarDelegate {
