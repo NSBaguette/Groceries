@@ -11,41 +11,41 @@ import UIKit
 
 final class SearchProductsResultsController: UITableViewController {
     private var data = [String]()
-    private var doneButton: UIBarButtonItem? = nil
-    
+    private var doneButton: UIBarButtonItem?
+
     public func updateSearchResults(_ results: [String]) {
         data = results
         tableView.reloadData()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         constructInterface()
     }
-    
+
     private func constructInterface() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
+
         let action = #selector(doneButtonPressed)
         doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: action)
         navigationItem.rightBarButtonItem = doneButton
     }
-    
-    @objc func doneButtonPressed(sender: Any) {
+
+    @objc func doneButtonPressed(sender _: Any) {
         dismiss(animated: true, completion: nil)
     }
 }
 
 extension SearchProductsResultsController {
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return data.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         cell.textLabel?.text = data[indexPath.row]

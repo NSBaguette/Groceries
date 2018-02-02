@@ -14,7 +14,7 @@ struct Product {
     private(set) var uid: Int
     private(set) var name: String
     private var brain: Brain
-    
+
     init(uid: Int, name: String, brain: Brain) {
         self.uid = uid
         self.name = name
