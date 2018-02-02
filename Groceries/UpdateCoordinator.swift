@@ -15,31 +15,31 @@ enum ChangeType: String {
 
 final class UpdateCoordinator {
     private var controllers = [ChangeType: [ModelConsumer]]()
-    private var brain: Brain! = nil
-    
+    private var brain: Brain!
+
     init(withBrain brain: Brain) {
         self.brain = brain
-        
+
         let name = NSNotification.Name(Brain.updateNotificationName)
         NotificationCenter.default.addObserver(self, selector: #selector(mailbox), name: name, object: nil)
     }
-    
+
     @objc func mailbox(notification: NSNotification) {
         if let change = notification.userInfo?[Brain.updateNotificationChangeKey] as? ChangeType {
             notify(aboutChange: change)
         }
     }
-    
+
     func subscribe(controller: ModelConsumer, for change: ChangeType) {
         var array = controllers[change]
         if array == nil {
             array = [ModelConsumer]()
         }
-        
+
         array?.append(controller)
         controllers[change] = array
     }
-    
+
     func notify(aboutChange change: ChangeType) {
         switch change {
         case .groceries:
@@ -48,17 +48,17 @@ final class UpdateCoordinator {
             notifyAboutProductsUpdate()
         }
     }
-    
+
     private func notifyAboutGroceriesUpdate() {
         guard let controllers = self.controllers[.groceries] else {
             return
         }
-        
-        brain.fetchGroceries { (result) in
+
+        brain.fetchGroceries { result in
             guard let products = result else {
                 return
             }
-            
+
             DispatchQueue.main.async {
                 for target in controllers {
                     target.consume(products)
@@ -66,17 +66,17 @@ final class UpdateCoordinator {
             }
         }
     }
-    
+
     private func notifyAboutProductsUpdate() {
         guard let controllers = self.controllers[.products] else {
             return
         }
 
-        brain.fetchProducts { (result) in
+        brain.fetchProducts { result in
             guard let products = result else {
                 return
             }
-            
+
             DispatchQueue.main.async {
                 for target in controllers {
                     target.consume(products)

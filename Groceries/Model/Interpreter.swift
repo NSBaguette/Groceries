@@ -8,8 +8,8 @@
 //  Copyright © 2017 Illia Akhaiev. All rights reserved.
 //
 
-import Foundation
 import FMDB
+import Foundation
 
 struct Interpreter {
     static func interpretProducts(_ fetchResult: FMResultSet, brain: Brain) -> [Product] {
@@ -17,15 +17,15 @@ struct Interpreter {
         while fetchResult.next() {
             let name = fetchResult.string(forColumn: "name")
             let uid = fetchResult.int(forColumn: "uid")
-            
+
             let product = Product(uid: Int(uid), name: name!, brain: brain)
             result.append(product)
         }
-        
+
         if result.count == 0 {
             return [Product]()
         }
-        
+
         return result
     }
 }

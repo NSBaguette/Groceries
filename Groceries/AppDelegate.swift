@@ -10,26 +10,25 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    private var brain: Brain! = nil
-    private var updater: UpdateCoordinator! = nil
-    private var presenter: Presenter! = nil
+    private var brain: Brain!
+    private var updater: UpdateCoordinator!
+    private var presenter: Presenter!
     private lazy var dbEngine: DatabaseEngine = {
         let path = Librarian.databasePath()
         return FMDBDatabaseEngine(with: path)
-    } ()
-    
+    }()
+
     var window: UIWindow?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         brain = Brain(withEngine: dbEngine)
         updater = UpdateCoordinator(withBrain: brain)
         presenter = iOSPresenter(withBrain: brain, updater: updater)
-        
+
         presenter.presentRootViewController(forWindow: window!)
         window?.makeKeyAndVisible()
-        
+
         return true
     }
 }

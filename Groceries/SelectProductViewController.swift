@@ -11,15 +11,15 @@ import UIKit
 
 final class SelectProductViewController: UITableViewController, ModelConsumer, PresentationPleader {
     typealias ModelItemType = [Product]
-    
-    private var presenter: Presenter? = nil
+
+    private var presenter: Presenter?
     private var data = [Product]()
-    private var searchBar: UISearchBar? = nil
-    private var searchResultsScreen: UITableViewController? = nil
-    private var searchController: UISearchController? = nil
-    
-    private var doneButton: UIBarButtonItem? = nil
-    private var addNewProductButton: UIBarButtonItem? = nil
+    private var searchBar: UISearchBar?
+    private var searchResultsScreen: UITableViewController?
+    private var searchController: UISearchController?
+
+    private var doneButton: UIBarButtonItem?
+    private var addNewProductButton: UIBarButtonItem?
 
     func consume(_ model: [Any]) {
         if let products = model as? [Product] {
@@ -27,28 +27,28 @@ final class SelectProductViewController: UITableViewController, ModelConsumer, P
             tableView.reloadData()
         }
     }
-    
+
     func injectPresenter(_ presenter: Presenter) {
         self.presenter = presenter
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        constructInterface()        
+
+        constructInterface()
     }
-    
+
     func constructInterface() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
+
         var action = #selector(doneButtonAction)
         doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: action)
         navigationItem.rightBarButtonItem = doneButton
-        
+
         action = #selector(addNewProductAction)
         addNewProductButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: action)
         navigationItem.leftBarButtonItem = addNewProductButton
-        
+
         searchBar = UISearchBar()
         searchBar?.delegate = self
         navigationItem.titleView = searchBar!
@@ -56,16 +56,16 @@ final class SelectProductViewController: UITableViewController, ModelConsumer, P
 //        searchController = UISearchController(searchResultsController: searchResultsScreen)
 //        searchController?.searchResultsUpdater = self
 //        searchController?.hidesNavigationBarDuringPresentation = false
-        
+
 //        self.definesPresentationContext = true
 //        navigationItem.searchController = searchController!
     }
-    
-    @objc func doneButtonAction(sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+
+    @objc func doneButtonAction(sender _: Any) {
+        dismiss(animated: true, completion: nil)
     }
-    
-    @objc func addNewProductAction(sender: Any) {
+
+    @objc func addNewProductAction(sender _: Any) {
         if let brain = presenter?.getBrain(), let text = searchBar?.text {
             brain.createProduct(withName: text)
         }
@@ -73,14 +73,14 @@ final class SelectProductViewController: UITableViewController, ModelConsumer, P
 }
 
 extension SelectProductViewController {
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return data.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         cell.textLabel?.text = data[indexPath.row].name
@@ -96,9 +96,10 @@ extension SelectProductViewController: UISearchBarDelegate {
 //    optional public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) // called when text starts editing
 //
 
-    public func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+    public func searchBarShouldEndEditing(_: UISearchBar) -> Bool {
         return true
     }
+
 //
 //    @available(iOS 2.0, *)
 //    optional public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) // called when text ends editing
