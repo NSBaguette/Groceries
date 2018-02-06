@@ -11,22 +11,28 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private var brain: Brain!
-    private var clerk: Clerk!
+    private var clerk: CancellableClerk!
     private var router: Router!
     private var actor: Actor!
-    private lazy var dbEngine: DatabaseEngine = {
-        let path = Librarian.databasePath()
-        return FMDBDatabaseEngine(with: path)
-    }()
+    private var engine: Engine!
+    private var cache: Cache!
 
     var window: UIWindow?
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        brain = Brain(withEngine: dbEngine)
+
+        let path = Librarian.databasePath()
+        engine = FMDBDatabaseEngine(with: path)
+        cache = CacheImpl()
+        brain = BrainImpl(withEngine: engine, cache: cache)
         clerk = ClerkImpl(withBrain: brain)
         actor = ActorImpl(withBrain: brain)
         router = iOSRouter(withClerk: clerk, actor: actor)
+
+        if let consumer = cache as? ModelConsumer {
+            clerk.subscribe(consumer, for: consumer.interests())
+        }
 
         router.presentRootViewController(forWindow: window!)
         window?.makeKeyAndVisible()

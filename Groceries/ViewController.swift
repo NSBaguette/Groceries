@@ -9,30 +9,11 @@
 import FMDB
 import UIKit
 
-final class ViewController: UITableViewController, ModelConsumer, RoutePleader, ActionPleader {
+final class ViewController: UITableViewController {
     private var addItemButton: UIBarButtonItem?
     private var data = [Product]()
     private var router: Router?
     private var actor: Actor?
-
-    func consume(_ model: [Any]) {
-        if let products = model as? [Product] {
-            data = products
-            tableView.reloadData()
-        }
-    }
-
-    func interests() -> ChangeType {
-        return .groceries
-    }
-
-    func injectRouter(_ router: Router) {
-        self.router = router
-    }
-
-    func injectActor(_ actor: Actor) {
-        self.actor = actor
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +34,32 @@ final class ViewController: UITableViewController, ModelConsumer, RoutePleader, 
     }
 }
 
-// Table view data source
+extension ViewController: ModelConsumer {
+    func consume(_ model: [Any]) {
+        if let products = model as? [Product] {
+            data = products
+            tableView.reloadData()
+        }
+    }
+
+    func interests() -> ChangeType {
+        return .groceries
+    }
+}
+
+extension ViewController: RoutePleader {
+    func injectRouter(_ router: Router) {
+        self.router = router
+    }
+}
+
+extension ViewController: ActionPleader {
+    func injectActor(_ actor: Actor) {
+        self.actor = actor
+    }
+}
+
+// UITableViewDataSource
 extension ViewController {
     override func numberOfSections(in _: UITableView) -> Int {
         return 1
@@ -70,7 +76,7 @@ extension ViewController {
     }
 }
 
-// Table view delegate
+// UITableViewDelegate
 extension ViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

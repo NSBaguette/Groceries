@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 
-final class SelectProductViewController: UITableViewController, ModelConsumer, RoutePleader, ActionPleader {
+final class SelectProductViewController: UITableViewController {
     typealias ModelItemType = [Product]
 
     private var router: Router?
     private var actor: Actor?
+    private weak var mortician: Mortician?
     private var data = [Product]()
     private var searchBar: UISearchBar?
     private var searchResultsScreen: UITableViewController?
@@ -21,25 +22,6 @@ final class SelectProductViewController: UITableViewController, ModelConsumer, R
 
     private var doneButton: UIBarButtonItem?
     private var addNewProductButton: UIBarButtonItem?
-
-    func consume(_ model: [Any]) {
-        if let products = model as? [Product] {
-            data = products
-            tableView.reloadData()
-        }
-    }
-
-    func interests() -> ChangeType {
-        return .products
-    }
-
-    func injectRouter(_ router: Router) {
-        self.router = router
-    }
-
-    func injectActor(_ actor: Actor) {
-        self.actor = actor
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +60,10 @@ final class SelectProductViewController: UITableViewController, ModelConsumer, R
         if let text = searchBar?.text {
             actor?.createProduct(name: text)
         }
+    }
+
+    deinit {
+        mortician?.remove(self, for: interests())
     }
 }
 
@@ -140,4 +126,33 @@ extension SelectProductViewController: UISearchBarDelegate {
 //
 //    @available(iOS 3.0, *)
 //    optional public func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int)
+}
+
+extension SelectProductViewController: MortalModelConsumer {
+    func consume(_ model: [Any]) {
+        if let products = model as? [Product] {
+            data = products
+            tableView.reloadData()
+        }
+    }
+
+    func interests() -> ChangeType {
+        return .products
+    }
+
+    func injectMortician(_ mortician: Mortician) {
+        self.mortician = mortician
+    }
+}
+
+extension SelectProductViewController: RoutePleader {
+    func injectRouter(_ router: Router) {
+        self.router = router
+    }
+}
+
+extension SelectProductViewController: ActionPleader {
+    func injectActor(_ actor: Actor) {
+        self.actor = actor
+    }
 }

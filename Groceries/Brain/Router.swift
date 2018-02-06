@@ -2,7 +2,8 @@
 //  Router.swift
 //  Groceries
 //
-//  Knows about Brain and view controllers. Presents view controllers
+//  Knows a bit about data and everything about view controllers.
+//  Presents view controllers
 //
 //  Created by Illia Akhaiev on 12/12/17.
 //  Copyright © 2017 Illia Akhaiev. All rights reserved.
@@ -16,7 +17,7 @@ protocol RoutePleader {
 }
 
 protocol Router {
-    init(withClerk: Clerk, actor: Actor)
+    init(withClerk: CancellableClerk, actor: Actor)
 
     func presentController(withId: String, pleader: UIViewController)
 
@@ -26,14 +27,14 @@ protocol Router {
 }
 
 struct iOSRouter: Router {
-    private var clerk: Clerk
+    private var clerk: CancellableClerk
     private var actor: Actor
 
-    init(withClerk clerk: Clerk, actor: Actor) {
+    init(withClerk clerk: CancellableClerk, actor: Actor) {
         self.init(clerk: clerk, actor: actor)
     }
 
-    internal init(clerk: Clerk, actor: Actor) {
+    internal init(clerk: CancellableClerk, actor: Actor) {
         self.clerk = clerk
         self.actor = actor
     }
@@ -69,8 +70,12 @@ struct iOSRouter: Router {
         }
 
         if let consumer = controller as? ModelConsumer {
-            clerk.subscribe(consumer: consumer, for: consumer.interests())
+            clerk.subscribe(consumer, for: consumer.interests())
             clerk.notify(aboutChange: consumer.interests())
+
+            if let mortal = consumer as? MortalModelConsumer {
+                mortal.injectMortician(clerk)
+            }
         }
 
         if let pleader = controller as? ActionPleader {

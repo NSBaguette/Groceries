@@ -2,7 +2,7 @@
 //  Brain.swift
 //  Groceries
 //
-//  Loads data from db and produces view-model
+//  Loads data from db and produces model objects
 //
 //  Created by Illia Akhaiev on 12/17/17.
 //  Copyright © 2017 Illia Akhaiev. All rights reserved.
@@ -11,24 +11,52 @@
 import Foundation
 import SQLite3
 
-protocol ModelConsumer {
-    func consume(_ model: [Any])
-    func interests() -> ChangeType
+protocol Brain: class {
+    func updateNotificationName() -> String
+    func updateNotificationChangeKey() -> String
+
+    func fetchGroceries(_ handler: @escaping ([Product]?) -> Void)
+    func fetchProducts(_ handler: @escaping ([Product]?) -> Void)
+    func purchase(product: Product)
+    func enqueue(product: Product)
+    func createProduct(withName name: String)
 }
 
-struct Brain {
-    public static let updateNotificationName = "com.twealm.groceries.brain.update"
-    public static let updateNotificationChangeKey = "com.twealm.groceries.brain.update.change_key"
+class BrainImpl {
+    private static let impl_updateNotificationName = "com.twealm.groceries.brain.update"
+    private static let impl_updateNotificationChangeKey = "com.twealm.groceries.brain.update.change_key"
 
-    private var database: DatabaseEngine
+    private var database: Engine
+    private var cache: Cache
 
-    init(withEngine engine: DatabaseEngine) {
+    init(withEngine engine: Engine, cache: Cache) {
         database = engine
+        self.cache = cache
+    }
+
+    private func phrase(for param: DatabaseAction) -> String {
+        return param.rawValue
+    }
+
+    private func reportChange(change: ChangeType) {
+        let name = NSNotification.Name(updateNotificationName())
+        let userInfo = [updateNotificationChangeKey(): change]
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: name, object: nil, userInfo: userInfo)
+        }
     }
 }
 
 // Fetch
-extension Brain {
+extension BrainImpl: Brain {
+    func updateNotificationName() -> String {
+        return BrainImpl.impl_updateNotificationName
+    }
+
+    func updateNotificationChangeKey() -> String {
+        return BrainImpl.impl_updateNotificationChangeKey
+    }
+
     func fetchGroceries(_ handler: @escaping ([Product]?) -> Void) {
         let query = phrase(for: .testFetch)
         database.executeFetchBlock({ db in
@@ -39,7 +67,7 @@ extension Brain {
                 return
             }
 
-            let products = Interpreter.interpretProducts(result, brain: self)
+            let products = Interpreter.interpretProducts(result)
             handler(products)
         })
     }
@@ -54,48 +82,36 @@ extension Brain {
                 return
             }
 
-            let products = Interpreter.interpretProducts(result, brain: self)
+            let products = Interpreter.interpretProducts(result)
             handler(products)
         }
     }
 
     func purchase(product: Product) {
         let query = phrase(for: .testDelete)
-        database.executeUpdateBlock { db in
+        database.executeUpdateBlock { [weak self] db in
             _ = db.executeUpdate(query, withArgumentsIn: [product.uid])
-            BrainChangeReporter.reportChange(change: .groceries)
+            self?.reportChange(change: .groceries)
         }
     }
 
     func enqueue(product: Product) {
         let query = phrase(for: .testEnqueue)
-        database.executeUpdateBlock { db in
+        database.executeUpdateBlock { [weak self] db in
             _ = db.executeUpdate(query, withArgumentsIn: [1, product.uid])
-            BrainChangeReporter.reportChange(change: .groceries)
+            self?.reportChange(change: .groceries)
         }
     }
 
     func createProduct(withName name: String) {
-        let query = phrase(for: .testInsert)
-        database.executeUpdateBlock { db in
-            _ = db.executeUpdate(query, withArgumentsIn: [name])
-            BrainChangeReporter.reportChange(change: .products)
+        if cache.containsProduct(withName: name) {
+            return
         }
-    }
-}
-
-extension Brain {
-    func phrase(for param: DatabaseAction) -> String {
-        return param.rawValue
-    }
-}
-
-struct BrainChangeReporter {
-    static func reportChange(change: ChangeType) {
-        let name = NSNotification.Name(Brain.updateNotificationName)
-        let userInfo = [Brain.updateNotificationChangeKey: change]
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: name, object: nil, userInfo: userInfo)
+        
+        let query = phrase(for: .testInsert)
+        database.executeUpdateBlock { [weak self] db in
+            _ = db.executeUpdate(query, withArgumentsIn: [name])
+            self?.reportChange(change: .products)
         }
     }
 }

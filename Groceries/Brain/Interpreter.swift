@@ -12,13 +12,13 @@ import FMDB
 import Foundation
 
 struct Interpreter {
-    static func interpretProducts(_ fetchResult: FMResultSet, brain: Brain) -> [Product] {
+    static func interpretProducts(_ fetchResult: FMResultSet) -> [Product] {
         var result = [Product]()
         while fetchResult.next() {
             let name = fetchResult.string(forColumn: "name")
             let uid = fetchResult.int(forColumn: "uid")
 
-            let product = Product(uid: Int(uid), name: name!, brain: brain)
+            let product = Product(uid: Int(uid), name: name!)
             result.append(product)
         }
 

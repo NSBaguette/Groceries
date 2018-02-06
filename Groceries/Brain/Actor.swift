@@ -2,6 +2,8 @@
 //  Actor.swift
 //  Groceries
 //
+//  Resposible for all kinds of actions.
+//
 //  Created by Illia Akhaiev on 2/6/18.
 //  Copyright © 2018 Illia Akhaiev. All rights reserved.
 //

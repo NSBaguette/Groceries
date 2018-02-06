@@ -13,11 +13,9 @@ import Foundation
 struct Product {
     private(set) var uid: Int
     private(set) var name: String
-    private var brain: Brain
 
-    init(uid: Int, name: String, brain: Brain) {
+    init(uid: Int, name: String) {
         self.uid = uid
         self.name = name
-        self.brain = brain
     }
 }
