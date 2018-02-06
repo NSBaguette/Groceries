@@ -1,5 +1,5 @@
 //
-//  Presenter.swift
+//  Router.swift
 //  Groceries
 //
 //  Knows about Brain and view controllers. Presents view controllers
@@ -16,7 +16,7 @@ protocol RoutePleader {
 }
 
 protocol Router {
-    init(withUpdater: UpdateCoordinator, actor: Actor)
+    init(withClerk: Clerk, actor: Actor)
 
     func presentController(withId: String, pleader: UIViewController)
 
@@ -26,15 +26,15 @@ protocol Router {
 }
 
 struct iOSRouter: Router {
-    private var updater: UpdateCoordinator
+    private var clerk: Clerk
     private var actor: Actor
 
-    init(withUpdater updater: UpdateCoordinator, actor: Actor) {
-        self.init(updater: updater, actor: actor)
+    init(withClerk clerk: Clerk, actor: Actor) {
+        self.init(clerk: clerk, actor: actor)
     }
 
-    internal init(updater: UpdateCoordinator, actor: Actor) {
-        self.updater = updater
+    internal init(clerk: Clerk, actor: Actor) {
+        self.clerk = clerk
         self.actor = actor
     }
 
@@ -69,8 +69,8 @@ struct iOSRouter: Router {
         }
 
         if let consumer = controller as? ModelConsumer {
-            updater.subscribe(consumer: consumer, for: consumer.interests())
-            updater.notify(aboutChange: consumer.interests())
+            clerk.subscribe(consumer: consumer, for: consumer.interests())
+            clerk.notify(aboutChange: consumer.interests())
         }
 
         if let pleader = controller as? ActionPleader {
