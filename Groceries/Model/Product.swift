@@ -21,13 +21,3 @@ struct Product {
         self.brain = brain
     }
 }
-
-extension Product {
-    func purchase() {
-        brain.purchase(product: self)
-    }
-
-    func enqueue() {
-        brain.enqueue(product: self)
-    }
-}

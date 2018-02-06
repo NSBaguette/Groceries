@@ -12,7 +12,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private var brain: Brain!
     private var updater: UpdateCoordinator!
-    private var presenter: Presenter!
+    private var router: Router!
+    private var actor: Actor!
     private lazy var dbEngine: DatabaseEngine = {
         let path = Librarian.databasePath()
         return FMDBDatabaseEngine(with: path)
@@ -24,9 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         brain = Brain(withEngine: dbEngine)
         updater = UpdateCoordinator(withBrain: brain)
-        presenter = iOSPresenter(withBrain: brain, updater: updater)
+        actor = DefaultActor(withBrain: brain)
+        router = iOSRouter(withUpdater: updater, actor: actor)
 
-        presenter.presentRootViewController(forWindow: window!)
+        router.presentRootViewController(forWindow: window!)
         window?.makeKeyAndVisible()
 
         return true

@@ -9,10 +9,11 @@
 import FMDB
 import UIKit
 
-final class ViewController: UITableViewController, ModelConsumer, PresentationPleader {
+final class ViewController: UITableViewController, ModelConsumer, RoutePleader, ActionPleader {
     private var addItemButton: UIBarButtonItem?
     private var data = [Product]()
-    private var presenter: Presenter?
+    private var router: Router?
+    private var actor: Actor?
 
     func consume(_ model: [Any]) {
         if let products = model as? [Product] {
@@ -21,8 +22,16 @@ final class ViewController: UITableViewController, ModelConsumer, PresentationPl
         }
     }
 
-    func injectPresenter(_ presenter: Presenter) {
-        self.presenter = presenter
+    func interests() -> ChangeType {
+        return .groceries
+    }
+
+    func injectRouter(_ router: Router) {
+        self.router = router
+    }
+
+    func injectActor(_ actor: Actor) {
+        self.actor = actor
     }
 
     override func viewDidLoad() {
@@ -40,7 +49,7 @@ final class ViewController: UITableViewController, ModelConsumer, PresentationPl
     }
 
     @objc func addItemButtonPressed(sender _: Any) {
-        presenter?.presentProductSelectionScreen(pleader: self)
+        router?.presentProductSelectionScreen(pleader: self)
     }
 }
 
@@ -67,6 +76,6 @@ extension ViewController {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let product = data[indexPath.row]
-        product.purchase()
+        actor?.purchaseProduct(product: product)
     }
 }

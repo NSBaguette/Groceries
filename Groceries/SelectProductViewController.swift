@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-final class SelectProductViewController: UITableViewController, ModelConsumer, PresentationPleader {
+final class SelectProductViewController: UITableViewController, ModelConsumer, RoutePleader, ActionPleader {
     typealias ModelItemType = [Product]
 
-    private var presenter: Presenter?
+    private var router: Router?
+    private var actor: Actor?
     private var data = [Product]()
     private var searchBar: UISearchBar?
     private var searchResultsScreen: UITableViewController?
@@ -28,8 +29,16 @@ final class SelectProductViewController: UITableViewController, ModelConsumer, P
         }
     }
 
-    func injectPresenter(_ presenter: Presenter) {
-        self.presenter = presenter
+    func interests() -> ChangeType {
+        return .products
+    }
+
+    func injectRouter(_ router: Router) {
+        self.router = router
+    }
+
+    func injectActor(_ actor: Actor) {
+        self.actor = actor
     }
 
     override func viewDidLoad() {
@@ -66,8 +75,8 @@ final class SelectProductViewController: UITableViewController, ModelConsumer, P
     }
 
     @objc func addNewProductAction(sender _: Any) {
-        if let brain = presenter?.getBrain(), let text = searchBar?.text {
-            brain.createProduct(withName: text)
+        if let text = searchBar?.text {
+            actor?.createProduct(name: text)
         }
     }
 }
@@ -89,7 +98,7 @@ extension SelectProductViewController {
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let product = data[indexPath.row]
-        product.enqueue()
+        actor?.enqueue(product: product)
     }
 }
 
