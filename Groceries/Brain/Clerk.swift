@@ -2,6 +2,8 @@
 //  Clerk.swift
 //  Groceries
 //
+//  Keeps tabs about changes and notifies intereseted parties.
+//
 //  Created by Illia Akhaiev on 1/28/18.
 //  Copyright © 2018 Illia Akhaiev. All rights reserved.
 //
@@ -13,29 +15,41 @@ enum ChangeType: String {
     case products = "create.product"
 }
 
+protocol ModelConsumer: class {
+    func consume(_ model: [Any])
+    func interests() -> ChangeType
+}
+
+protocol MortalModelConsumer: ModelConsumer {
+    func injectMortician(_ mortician: Mortician)
+}
+
 protocol Clerk {
-    func subscribe(consumer: ModelConsumer, for change: ChangeType)
+    func subscribe(_ consumer: ModelConsumer, for change: ChangeType)
     func notify(aboutChange change: ChangeType)
 }
 
-final class ClerkImpl: Clerk {
+protocol Mortician: class {
+    func remove(_ consumer: ModelConsumer, for change: ChangeType)
+}
+
+protocol CancellableClerk: Clerk, Mortician {
+}
+
+final class ClerkImpl {
     private var controllers = [ChangeType: [ModelConsumer]]()
     private var brain: Brain!
 
     init(withBrain brain: Brain) {
         self.brain = brain
 
-        let name = NSNotification.Name(Brain.updateNotificationName)
+        let name = NSNotification.Name(brain.updateNotificationName())
         NotificationCenter.default.addObserver(self, selector: #selector(mailbox), name: name, object: nil)
     }
+}
 
-    @objc func mailbox(notification: NSNotification) {
-        if let change = notification.userInfo?[Brain.updateNotificationChangeKey] as? ChangeType {
-            notify(aboutChange: change)
-        }
-    }
-
-    func subscribe(consumer: ModelConsumer, for change: ChangeType) {
+extension ClerkImpl: Clerk {
+    func subscribe(_ consumer: ModelConsumer, for change: ChangeType) {
         var array = controllers[change]
         if array == nil {
             array = [ModelConsumer]()
@@ -51,6 +65,24 @@ final class ClerkImpl: Clerk {
             notifyAboutGroceriesUpdate()
         case .products:
             notifyAboutProductsUpdate()
+        }
+    }
+}
+
+extension ClerkImpl: CancellableClerk {
+    func remove(_ consumer: ModelConsumer, for change: ChangeType) {
+        var array = controllers[change]
+        if let index = array?.index(where: { $0 === consumer }) {
+            array?.remove(at: index)
+            controllers[change] = array
+        }
+    }
+}
+
+extension ClerkImpl {
+    @objc func mailbox(notification: NSNotification) {
+        if let change = notification.userInfo?[brain.updateNotificationChangeKey()] as? ChangeType {
+            notify(aboutChange: change)
         }
     }
 

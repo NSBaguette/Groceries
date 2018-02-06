@@ -1,8 +1,8 @@
 //
-//  DatabaseController.swift
+//  Engine.swift
 //  Groceries
 //
-//  Responsible for loading data from db. That's all.
+//  Responsible for loading/updating data from db. That's all.
 //
 //  Created by Illia Akhaiev on 11/21/17.
 //  Copyright © 2017 Illia Akhaiev. All rights reserved.
@@ -19,12 +19,12 @@ enum DatabaseAction: String {
     case testEnqueue = "INSERT INTO GroceriesLists (Position, ListID, ProductId) VALUES (?, 1, ?)"
 }
 
-protocol DatabaseEngine {
+protocol Engine {
     func executeFetchBlock(_ block: @escaping (FMDatabase) -> Void)
     func executeUpdateBlock(_ block: @escaping (FMDatabase) -> Void)
 }
 
-final class FMDBDatabaseEngine: DatabaseEngine {
+final class FMDBDatabaseEngine: Engine {
     private let serialQueue = DispatchQueue(label: "com.twealm.groceries.db.serial")
     private var database: FMDatabase
 
