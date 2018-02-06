@@ -30,13 +30,13 @@ final class UpdateCoordinator {
         }
     }
 
-    func subscribe(controller: ModelConsumer, for change: ChangeType) {
+    func subscribe(consumer: ModelConsumer, for change: ChangeType) {
         var array = controllers[change]
         if array == nil {
             array = [ModelConsumer]()
         }
 
-        array?.append(controller)
+        array?.append(consumer)
         controllers[change] = array
     }
 

@@ -11,14 +11,12 @@
 import Foundation
 import UIKit
 
-protocol PresentationPleader {
-    func injectPresenter(_ presenter: Presenter)
+protocol RoutePleader {
+    func injectRouter(_ presenter: Router)
 }
 
-protocol Presenter {
-    init(withBrain: Brain, updater: UpdateCoordinator)
-
-    func getBrain() -> Brain
+protocol Router {
+    init(withUpdater: UpdateCoordinator, actor: Actor)
 
     func presentController(withId: String, pleader: UIViewController)
 
@@ -27,21 +25,17 @@ protocol Presenter {
     func presentProductSelectionScreen(pleader: UIViewController)
 }
 
-struct iOSPresenter: Presenter {
-    private var brain: Brain
+struct iOSRouter: Router {
     private var updater: UpdateCoordinator
+    private var actor: Actor
 
-    init(withBrain: Brain, updater: UpdateCoordinator) {
-        self.init(brain: withBrain, updater: updater)
+    init(withUpdater updater: UpdateCoordinator, actor: Actor) {
+        self.init(updater: updater, actor: actor)
     }
 
-    internal init(brain: Brain, updater: UpdateCoordinator) {
-        self.brain = brain
+    internal init(updater: UpdateCoordinator, actor: Actor) {
         self.updater = updater
-    }
-
-    func getBrain() -> Brain {
-        return brain
+        self.actor = actor
     }
 
     func presentRootViewController(forWindow window: UIWindow) {
@@ -53,8 +47,6 @@ struct iOSPresenter: Presenter {
     func presentProductSelectionScreen(pleader: UIViewController) {
         let controller = SelectProductViewController(style: .plain)
         configure(controller)
-        updater.subscribe(controller: controller, for: .products)
-        updater.notify(aboutChange: .products)
 
         let navController = UINavigationController(rootViewController: controller)
         pleader.present(navController, animated: true, completion: nil)
@@ -68,15 +60,21 @@ struct iOSPresenter: Presenter {
         let controller = ViewController(style: .grouped)
         configure(controller)
 
-        updater.subscribe(controller: controller, for: .groceries)
-        updater.notify(aboutChange: .groceries)
-
         return controller
     }
 
     func configure(_ controller: UIViewController) {
-        if let pleader = controller as? PresentationPleader {
-            pleader.injectPresenter(self)
+        if let pleader = controller as? RoutePleader {
+            pleader.injectRouter(self)
+        }
+
+        if let consumer = controller as? ModelConsumer {
+            updater.subscribe(consumer: consumer, for: consumer.interests())
+            updater.notify(aboutChange: consumer.interests())
+        }
+
+        if let pleader = controller as? ActionPleader {
+            pleader.injectActor(actor)
         }
     }
 }

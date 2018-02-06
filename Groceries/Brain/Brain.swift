@@ -13,6 +13,7 @@ import SQLite3
 
 protocol ModelConsumer {
     func consume(_ model: [Any])
+    func interests() -> ChangeType
 }
 
 struct Brain {
