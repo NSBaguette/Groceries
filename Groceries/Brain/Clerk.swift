@@ -1,5 +1,5 @@
 //
-//  UpdateCoordinator.swift
+//  Clerk.swift
 //  Groceries
 //
 //  Created by Illia Akhaiev on 1/28/18.
@@ -13,7 +13,12 @@ enum ChangeType: String {
     case products = "create.product"
 }
 
-final class UpdateCoordinator {
+protocol Clerk {
+    func subscribe(consumer: ModelConsumer, for change: ChangeType)
+    func notify(aboutChange change: ChangeType)
+}
+
+final class ClerkImpl: Clerk {
     private var controllers = [ChangeType: [ModelConsumer]]()
     private var brain: Brain!
 

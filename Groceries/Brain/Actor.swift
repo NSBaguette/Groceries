@@ -18,7 +18,7 @@ protocol ActionPleader {
     func injectActor(_ actor: Actor)
 }
 
-struct DefaultActor: Actor {
+struct ActorImpl: Actor {
     private let brain: Brain
 
     init(withBrain brain: Brain) {
