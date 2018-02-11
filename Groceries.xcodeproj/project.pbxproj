@@ -99,6 +99,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		692A9AEC202DBD2500490439 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				696897021E6D653E0035E5C3 /* ViewController.swift */,
+				69850EE31FE06F7F00E78535 /* SelectProductViewController.swift */,
+				69B320451FE27DD8005AAE3D /* SearchProductsResultsController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		69358FA71FC42D44004C3231 /* Brain */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,12 +149,10 @@
 		696896FF1E6D653E0035E5C3 /* Groceries */ = {
 			isa = PBXGroup;
 			children = (
+				692A9AEC202DBD2500490439 /* Controllers */,
 				698F4C441FE6B5CF00925FA8 /* Model */,
 				69358FA71FC42D44004C3231 /* Brain */,
 				696897001E6D653E0035E5C3 /* AppDelegate.swift */,
-				696897021E6D653E0035E5C3 /* ViewController.swift */,
-				69850EE31FE06F7F00E78535 /* SelectProductViewController.swift */,
-				69B320451FE27DD8005AAE3D /* SearchProductsResultsController.swift */,
 			);
 			path = Groceries;
 			sourceTree = "<group>";
