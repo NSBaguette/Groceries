@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		691137311FDC186F00F4018E /* sql in Resources */ = {isa = PBXBuildFile; fileRef = 691137301FDC186F00F4018E /* sql */; };
+		692A9AEF202DBDEC00490439 /* SelectableProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692A9AEE202DBDEC00490439 /* SelectableProductCell.swift */; };
 		69358FA91FC42D6D004C3231 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69358FA81FC42D6D004C3231 /* Engine.swift */; };
 		696897011E6D653E0035E5C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696897001E6D653E0035E5C3 /* AppDelegate.swift */; };
 		696897031E6D653E0035E5C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696897021E6D653E0035E5C3 /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		691137301FDC186F00F4018E /* sql */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sql; sourceTree = "<group>"; };
+		692A9AEE202DBDEC00490439 /* SelectableProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableProductCell.swift; sourceTree = "<group>"; };
 		69358FA81FC42D6D004C3231 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		696896FD1E6D653E0035E5C3 /* Groceries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groceries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		696897001E6D653E0035E5C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,14 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		692A9AED202DBDD600490439 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				692A9AEE202DBDEC00490439 /* SelectableProductCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		69358FA71FC42D44004C3231 /* Brain */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +156,7 @@
 		696896FF1E6D653E0035E5C3 /* Groceries */ = {
 			isa = PBXGroup;
 			children = (
+				692A9AED202DBDD600490439 /* Views */,
 				692A9AEC202DBD2500490439 /* Controllers */,
 				698F4C441FE6B5CF00925FA8 /* Model */,
 				69358FA71FC42D44004C3231 /* Brain */,
@@ -368,6 +379,7 @@
 				696897031E6D653E0035E5C3 /* ViewController.swift in Sources */,
 				696897011E6D653E0035E5C3 /* AppDelegate.swift in Sources */,
 				697991801FD95A5500CEC38F /* Librarian.swift in Sources */,
+				692A9AEF202DBDEC00490439 /* SelectableProductCell.swift in Sources */,
 				698F4C4A1FE6C81000925FA8 /* Brain.swift in Sources */,
 				69358FA91FC42D6D004C3231 /* Engine.swift in Sources */,
 			);
