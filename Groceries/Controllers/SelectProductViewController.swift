@@ -12,6 +12,7 @@ import UIKit
 final class SelectProductViewController: UITableViewController {
     typealias ModelItemType = [Product]
 
+    private let cellId = "cell"
     private var router: Router?
     private var actor: Actor?
     private weak var mortician: Mortician?
@@ -30,7 +31,7 @@ final class SelectProductViewController: UITableViewController {
     }
 
     func constructInterface() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(SelectableProductCell.self, forCellReuseIdentifier: self.cellId)
 
         var action = #selector(doneButtonAction)
         doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: action)
@@ -77,12 +78,19 @@ extension SelectProductViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.textLabel?.text = data[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId) as! SelectableProductCell
+        cell.cellTextLabel.text = data[indexPath.row].name
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
     }
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         let product = data[indexPath.row]
         actor?.enqueue(product: product)
     }
