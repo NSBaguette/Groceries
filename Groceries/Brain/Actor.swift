@@ -20,7 +20,7 @@ protocol ActionPleader {
     func injectActor(_ actor: Actor)
 }
 
-struct ActorImpl: Actor {
+class ActorImpl: Actor {
     private let brain: Brain
 
     init(withBrain brain: Brain) {
@@ -28,7 +28,15 @@ struct ActorImpl: Actor {
     }
 
     func createProduct(name: String) {
-        brain.createProduct(withName: name)
+        brain.createProduct(withName: name) { [weak self] result in
+            guard let product = result else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self?.enqueue(product: product)
+            }
+        }
     }
 
     func purchaseProduct(product: Product) {

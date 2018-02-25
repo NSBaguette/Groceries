@@ -14,6 +14,7 @@ protocol Cache {
     func getProducts() -> [Product]
     func containsProduct(product: Product) -> Bool
     func containsProduct(withName: String) -> Bool
+    func getProduct(withName: String) -> Product?
 }
 
 final class CacheImpl {
@@ -44,5 +45,10 @@ extension CacheImpl: Cache {
 
     func containsProduct(withName name: String) -> Bool {
         return products.contains(where: { $0.name == name })
+    }
+
+    func getProduct(withName name: String) -> Product? {
+        let result = products.first(where: { $0.name == name })
+        return result
     }
 }
