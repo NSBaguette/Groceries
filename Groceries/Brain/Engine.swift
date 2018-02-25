@@ -17,6 +17,7 @@ enum DatabaseAction: String {
     case testInsert = "INSERT INTO Groceries (Name) VALUES (?)"
     case testProductsFetch = "SELECT Name, uid FROM Groceries"
     case testEnqueue = "INSERT INTO GroceriesLists (Position, ListID, ProductId) VALUES (?, 1, ?)"
+    case testFetchLastInsertedGrocerie = "SELECT * FROM Groceries WHERE uid = (SELECT MAX(uid) FROM Groceries)"
 }
 
 protocol Engine {

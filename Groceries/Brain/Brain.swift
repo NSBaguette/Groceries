@@ -19,7 +19,7 @@ protocol Brain: class {
     func fetchProducts(_ handler: @escaping ([Product]?) -> Void)
     func purchase(product: Product)
     func enqueue(product: Product)
-    func createProduct(withName name: String)
+    func createProduct(withName name: String, _ handler: @escaping (Product?) -> Void)
 }
 
 class BrainImpl {
@@ -45,9 +45,24 @@ class BrainImpl {
             NotificationCenter.default.post(name: name, object: nil, userInfo: userInfo)
         }
     }
+
+    private func readLastAddedProduct(_ handler: @escaping (Product?) -> Void) {
+        let query = phrase(for: .testFetchLastInsertedGrocerie)
+        database.executeFetchBlock { db in
+            guard let result = db.executeQuery(query, withArgumentsIn: []) else {
+                print("Fetch error. Got \(db.lastErrorMessage())")
+                BrainImpl.callback(param: nil, handler)
+
+                return
+            }
+
+            let products = Interpreter.interpretProducts(result)
+            BrainImpl.callback(param: products.first, handler)
+        }
+    }
 }
 
-// Fetch
+// Database
 extension BrainImpl: Brain {
     func updateNotificationName() -> String {
         return BrainImpl.impl_updateNotificationName
@@ -64,11 +79,12 @@ extension BrainImpl: Brain {
 
             guard let result = temp else {
                 print("Fetch error. Got \(db.lastErrorMessage())")
+                BrainImpl.callback(param: nil, handler)
                 return
             }
 
             let products = Interpreter.interpretProducts(result)
-            handler(products)
+            BrainImpl.callback(param: products, handler)
         })
     }
 
@@ -79,11 +95,12 @@ extension BrainImpl: Brain {
 
             guard let result = temp else {
                 print("Fetch error. Got \(db.lastErrorMessage())")
+                BrainImpl.callback(param: nil, handler)
                 return
             }
 
             let products = Interpreter.interpretProducts(result)
-            handler(products)
+            BrainImpl.callback(param: products, handler)
         }
     }
 
@@ -103,15 +120,34 @@ extension BrainImpl: Brain {
         }
     }
 
-    func createProduct(withName name: String) {
+    func createProduct(withName name: String, _ handler: @escaping (Product?) -> Void) {
         if cache.containsProduct(withName: name) {
+            let product = cache.getProduct(withName: name)
+            BrainImpl.callback(param: product, handler)
+
             return
         }
-        
+
         let query = phrase(for: .testInsert)
         database.executeUpdateBlock { [weak self] db in
-            _ = db.executeUpdate(query, withArgumentsIn: [name])
+            let result = db.executeUpdate(query, withArgumentsIn: [name])
+            if result == false {
+                print("Insert error. Got \(db.lastErrorMessage())")
+                BrainImpl.callback(param: nil, handler)
+                return
+            }
+
             self?.reportChange(change: .products)
+            self?.readLastAddedProduct(handler)
+        }
+    }
+}
+
+// Deliver result
+extension BrainImpl {
+    private class func callback<T>(param: T?, _ handler: @escaping (T?) -> Void) {
+        DispatchQueue.main.async {
+            handler(param)
         }
     }
 }
