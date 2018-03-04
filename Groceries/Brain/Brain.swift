@@ -47,7 +47,7 @@ class BrainImpl {
     }
 
     private func readLastAddedProduct(_ handler: @escaping (Product?) -> Void) {
-        let query = phrase(for: .testFetchLastInsertedGrocerie)
+        let query = phrase(for: .testFetchLastInsertedGrocery)
         database.executeFetchBlock { db in
             guard let result = db.executeQuery(query, withArgumentsIn: []) else {
                 print("Fetch error. Got \(db.lastErrorMessage())")
@@ -73,7 +73,7 @@ extension BrainImpl: Brain {
     }
 
     func fetchGroceries(_ handler: @escaping ([Product]?) -> Void) {
-        let query = phrase(for: .testFetch)
+        let query = phrase(for: .testGroceriesFetch)
         database.executeFetchBlock({ db in
             let temp = db.executeQuery(query, withArgumentsIn: [])
 
@@ -109,6 +109,7 @@ extension BrainImpl: Brain {
         database.executeUpdateBlock { [weak self] db in
             _ = db.executeUpdate(query, withArgumentsIn: [product.uid])
             self?.reportChange(change: .groceries)
+            self?.reportChange(change: .products)
         }
     }
 
@@ -117,6 +118,7 @@ extension BrainImpl: Brain {
         database.executeUpdateBlock { [weak self] db in
             _ = db.executeUpdate(query, withArgumentsIn: [1, product.uid])
             self?.reportChange(change: .groceries)
+            self?.reportChange(change: .products)
         }
     }
 

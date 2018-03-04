@@ -27,31 +27,44 @@ fileprivate final class Ruler {
 final class SelectableProductCell: UITableViewCell {
     private var checkmark: UIImageView = UIImageView()
     private var state: SelectableProductCellState = .notSelected
-    private(set) var cellTextLabel = UILabel()
+    private(set) var titleLabel = UILabel()
     private var internals = SelectableProductCellInternals()
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         constructInterface()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+
         constructInterface()
     }
-    
+
+    func updateState(to value: SelectableProductCellState) {
+        guard state != value else {
+            return
+        }
+
+        state = value
+        updateInterface()
+    }
+
     private func constructInterface() {
-        contentView.addSubview(cellTextLabel)
-        internals.checkmarkOffset = Ruler.checkmarkOffset(from: self.separatorInset.left)
+        contentView.addSubview(titleLabel)
+        internals.checkmarkOffset = Ruler.checkmarkOffset(from: separatorInset.left)
         accessoryType = .detailButton
-        
+
         contentView.addSubview(checkmark)
         checkmark.image = checkmarkImage(for: state)
         applyConstraints(internals: internals)
     }
-    
+
+    private func updateInterface() {
+        checkmark.image = checkmarkImage(for: state)
+    }
+
     private func checkmarkImage(for state: SelectableProductCellState) -> UIImage {
         switch state {
         case .selected:
@@ -63,15 +76,14 @@ final class SelectableProductCell: UITableViewCell {
 }
 
 extension SelectableProductCell {
-    
     override func updateConstraints() {
         super.updateConstraints()
     }
-    
+
     private func applyConstraints(internals: SelectableProductCellInternals) {
         checkmark.translatesAutoresizingMaskIntoConstraints = false
-        cellTextLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+
         var constraint = NSLayoutConstraint(item: checkmark,
                                             attribute: .centerY,
                                             relatedBy: .equal,
@@ -80,7 +92,7 @@ extension SelectableProductCell {
                                             multiplier: 1,
                                             constant: 0)
         contentView.addConstraint(constraint)
-        
+
         constraint = NSLayoutConstraint(item: checkmark,
                                         attribute: .left,
                                         relatedBy: .equal,
@@ -107,9 +119,9 @@ extension SelectableProductCell {
                                         multiplier: 1,
                                         constant: 0)
         contentView.addConstraint(constraint)
-        
+
         //
-        constraint = NSLayoutConstraint(item: cellTextLabel,
+        constraint = NSLayoutConstraint(item: titleLabel,
                                         attribute: .left,
                                         relatedBy: .equal,
                                         toItem: checkmark,
@@ -117,8 +129,8 @@ extension SelectableProductCell {
                                         multiplier: 1,
                                         constant: internals.checkmarkOffset.right)
         contentView.addConstraint(constraint)
-        
-        constraint = NSLayoutConstraint(item: cellTextLabel,
+
+        constraint = NSLayoutConstraint(item: titleLabel,
                                         attribute: .right,
                                         relatedBy: .equal,
                                         toItem: contentView,
@@ -126,8 +138,8 @@ extension SelectableProductCell {
                                         multiplier: 1,
                                         constant: 0)
         contentView.addConstraint(constraint)
-        
-        constraint = NSLayoutConstraint(item: cellTextLabel,
+
+        constraint = NSLayoutConstraint(item: titleLabel,
                                         attribute: .centerY,
                                         relatedBy: .equal,
                                         toItem: contentView,
@@ -135,8 +147,8 @@ extension SelectableProductCell {
                                         multiplier: 1,
                                         constant: 0)
         contentView.addConstraint(constraint)
-        
-        constraint = NSLayoutConstraint(item: cellTextLabel,
+
+        constraint = NSLayoutConstraint(item: titleLabel,
                                         attribute: .height,
                                         relatedBy: .equal,
                                         toItem: contentView,

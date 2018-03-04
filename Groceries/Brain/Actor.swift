@@ -10,16 +10,6 @@
 
 import Foundation
 
-protocol Actor {
-    func createProduct(name: String)
-    func purchaseProduct(product: Product)
-    func enqueue(product: Product)
-}
-
-protocol ActionPleader {
-    func injectActor(_ actor: Actor)
-}
-
 class ActorImpl: Actor {
     private let brain: Brain
 
@@ -45,5 +35,9 @@ class ActorImpl: Actor {
 
     func enqueue(product: Product) {
         brain.enqueue(product: product)
+    }
+
+    func dequeue(product: Product) {
+        purchaseProduct(product: product)
     }
 }

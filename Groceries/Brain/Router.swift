@@ -12,20 +12,6 @@
 import Foundation
 import UIKit
 
-protocol RoutePleader {
-    func injectRouter(_ presenter: Router)
-}
-
-protocol Router {
-    init(withClerk: CancellableClerk, actor: Actor)
-
-    func presentController(withId: String, pleader: UIViewController)
-
-    func presentRootViewController(forWindow window: UIWindow)
-
-    func presentProductSelectionScreen(pleader: UIViewController)
-}
-
 struct iOSRouter: Router {
     private var clerk: CancellableClerk
     private var actor: Actor
@@ -71,7 +57,7 @@ struct iOSRouter: Router {
 
         if let consumer = controller as? ModelConsumer {
             clerk.subscribe(consumer, for: consumer.interests())
-            clerk.notify(aboutChange: consumer.interests())
+            clerk.notify(about: consumer.interests())
 
             if let mortal = consumer as? MortalModelConsumer {
                 mortal.injectMortician(clerk)
