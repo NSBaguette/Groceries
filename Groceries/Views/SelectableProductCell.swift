@@ -14,13 +14,11 @@ enum SelectableProductCellState {
     case notSelected
 }
 
-fileprivate final class SelectableProductCellInternals {
-    var checkmarkOffset = UIEdgeInsets.zero
-}
-
 fileprivate final class Ruler {
-    static func checkmarkOffset(from offset: CGFloat) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, offset + 1, 0, 5)
+    var checkmark: IATViewOffset = IATViewOffset()
+
+    func updateCheckmark(offset: CGFloat) {
+        checkmark = IATViewOffset(left: offset + 1, right: 5)
     }
 }
 
@@ -28,7 +26,6 @@ final class SelectableProductCell: UITableViewCell {
     private var checkmark: UIImageView = UIImageView()
     private var state: SelectableProductCellState = .notSelected
     private(set) var titleLabel = UILabel()
-    private var internals = SelectableProductCellInternals()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -53,12 +50,15 @@ final class SelectableProductCell: UITableViewCell {
 
     private func constructInterface() {
         contentView.addSubview(titleLabel)
-        internals.checkmarkOffset = Ruler.checkmarkOffset(from: separatorInset.left)
+
         accessoryType = .detailButton
 
         contentView.addSubview(checkmark)
         checkmark.image = checkmarkImage(for: state)
-        applyConstraints(internals: internals)
+
+        let rules = Ruler()
+        rules.updateCheckmark(offset: separatorInset.left)
+        applyConstraints(rules: rules)
     }
 
     private func updateInterface() {
@@ -80,7 +80,7 @@ extension SelectableProductCell {
         super.updateConstraints()
     }
 
-    private func applyConstraints(internals: SelectableProductCellInternals) {
+    private func applyConstraints(rules: Ruler) {
         checkmark.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
@@ -99,7 +99,7 @@ extension SelectableProductCell {
                                         toItem: contentView,
                                         attribute: .left,
                                         multiplier: 1,
-                                        constant: internals.checkmarkOffset.left)
+                                        constant: rules.checkmark.left)
         contentView.addConstraint(constraint)
 
         constraint = NSLayoutConstraint(item: checkmark,
@@ -127,7 +127,7 @@ extension SelectableProductCell {
                                         toItem: checkmark,
                                         attribute: .right,
                                         multiplier: 1,
-                                        constant: internals.checkmarkOffset.right)
+                                        constant: rules.checkmark.right)
         contentView.addConstraint(constraint)
 
         constraint = NSLayoutConstraint(item: titleLabel,

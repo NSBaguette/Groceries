@@ -79,3 +79,19 @@ protocol Actor {
 protocol ActionPleader {
     func injectActor(_ actor: Actor)
 }
+
+// MARK: -- View offset
+
+struct IATViewOffset {
+    var top: CGFloat
+    var left: CGFloat
+    var bottom: CGFloat
+    var right: CGFloat
+
+    init(top: CGFloat = 0, left: CGFloat = 0, bottom: CGFloat = 0, right: CGFloat = 0) {
+        self.top = top
+        self.left = left
+        self.bottom = bottom
+        self.right = right
+    }
+}
