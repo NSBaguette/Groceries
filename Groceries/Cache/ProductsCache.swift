@@ -1,40 +1,23 @@
 //
-//  Cache.swift
+//  ProductsCache.swift
 //  Groceries
 //
-//  Keeps cache of products and lists.
-//
-//  Created by Illia Akhaiev on 2/6/18.
+//  Created by Illia Akhaiev on 2/27/18.
 //  Copyright © 2018 Illia Akhaiev. All rights reserved.
 //
 
 import Foundation
 
-protocol Cache {
+protocol ProductsCache {
     func getProducts() -> [Product]
     func containsProduct(product: Product) -> Bool
     func containsProduct(withName: String) -> Bool
     func getProduct(withName: String) -> Product?
 }
 
-final class CacheImpl {
+final class ProductsCacheImpl: ProductsCache {
     private var products = [Product]()
-}
 
-extension CacheImpl: ModelConsumer {
-    func interests() -> ChangeType {
-        return .products
-    }
-
-    func consume(_ model: [Any]) {
-        if let result = model as? [Product] {
-            products.removeAll()
-            products.append(contentsOf: result)
-        }
-    }
-}
-
-extension CacheImpl: Cache {
     func getProducts() -> [Product] {
         return products
     }
@@ -50,5 +33,18 @@ extension CacheImpl: Cache {
     func getProduct(withName name: String) -> Product? {
         let result = products.first(where: { $0.name == name })
         return result
+    }
+}
+
+extension ProductsCacheImpl: ModelConsumer {
+    func interests() -> Interests {
+        return .products
+    }
+
+    func consume(_ model: [Any], change _: ChangeType) {
+        if let result = model as? [Product] {
+            products.removeAll()
+            products.append(contentsOf: result)
+        }
     }
 }

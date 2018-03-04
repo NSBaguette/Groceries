@@ -31,7 +31,7 @@ final class SelectProductViewController: UITableViewController {
     }
 
     func constructInterface() {
-        tableView.register(SelectableProductCell.self, forCellReuseIdentifier: self.cellId)
+        tableView.register(SelectableProductCell.self, forCellReuseIdentifier: cellId)
 
         var action = #selector(doneButtonAction)
         doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: action)
@@ -64,9 +64,11 @@ final class SelectProductViewController: UITableViewController {
     }
 
     deinit {
-        mortician?.remove(self, for: interests())
+        mortician?.unsubscribe(self, for: interests())
     }
 }
+
+// MARK: UITableView
 
 extension SelectProductViewController {
     override func numberOfSections(in _: UITableView) -> Int {
@@ -78,23 +80,34 @@ extension SelectProductViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId) as! SelectableProductCell
-        cell.cellTextLabel.text = data[indexPath.row].name
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! SelectableProductCell
+        let product = data[indexPath.row]
+
+        let text = product.name
+        let state: SelectableProductCellState = product.enqueued ? .selected : .notSelected
+
+        cell.titleLabel.text = text
+        cell.updateState(to: state)
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+    override func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return 44
     }
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
         let product = data[indexPath.row]
-        actor?.enqueue(product: product)
+        if product.enqueued {
+            actor?.dequeue(product: product)
+        } else {
+            actor?.enqueue(product: product)
+        }
     }
 }
+
+// MARK: UISearchBarDelegate
 
 extension SelectProductViewController: UISearchBarDelegate {
 //    @available(iOS 2.0, *)
@@ -136,15 +149,17 @@ extension SelectProductViewController: UISearchBarDelegate {
 //    optional public func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int)
 }
 
+// MARK: MortalModelConsumer
+
 extension SelectProductViewController: MortalModelConsumer {
-    func consume(_ model: [Any]) {
+    func consume(_ model: [Any], change _: ChangeType) {
         if let products = model as? [Product] {
             data = products
             tableView.reloadData()
         }
     }
 
-    func interests() -> ChangeType {
+    func interests() -> Interests {
         return .products
     }
 
@@ -153,11 +168,15 @@ extension SelectProductViewController: MortalModelConsumer {
     }
 }
 
+// MARK: RoutePleader
+
 extension SelectProductViewController: RoutePleader {
     func injectRouter(_ router: Router) {
         self.router = router
     }
 }
+
+// MARK: ActionPleader
 
 extension SelectProductViewController: ActionPleader {
     func injectActor(_ actor: Actor) {

@@ -30,8 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         actor = ActorImpl(withBrain: brain)
         router = iOSRouter(withClerk: clerk, actor: actor)
 
-        if let consumer = cache as? ModelConsumer {
-            clerk.subscribe(consumer, for: consumer.interests())
+        if let object = cache as? CacheImpl {
+            object.subscribe(clerk: clerk)
         }
 
         router.presentRootViewController(forWindow: window!)

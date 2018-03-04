@@ -11,14 +11,24 @@
 import FMDB
 import Foundation
 
+enum ProductFields: String {
+    case name
+    case uid
+    case enqueued
+}
+
 struct Interpreter {
     static func interpretProducts(_ fetchResult: FMResultSet) -> [Product] {
         var result = [Product]()
         while fetchResult.next() {
-            let name = fetchResult.string(forColumn: "name")
-            let uid = fetchResult.int(forColumn: "uid")
+            guard
+                let name = fetchResult.string(for: .name),
+                let uid = fetchResult.int(for: .uid),
+                let enqueued = fetchResult.bool(for: .enqueued) else {
+                continue
+            }
 
-            let product = Product(uid: Int(uid), name: name!)
+            let product = Product(uid: uid, name: name, enqueued: enqueued)
             result.append(product)
         }
 
@@ -27,5 +37,20 @@ struct Interpreter {
         }
 
         return result
+    }
+}
+
+extension FMResultSet {
+    func string(for field: ProductFields) -> String? {
+        return string(forColumn: field.rawValue)
+    }
+
+    func int(for field: ProductFields) -> Int? {
+        let value = int(forColumn: field.rawValue)
+        return Int(value)
+    }
+
+    func bool(for field: ProductFields) -> Bool? {
+        return bool(forColumn: field.rawValue)
     }
 }

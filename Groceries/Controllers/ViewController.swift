@@ -35,14 +35,14 @@ final class ViewController: UITableViewController {
 }
 
 extension ViewController: ModelConsumer {
-    func consume(_ model: [Any]) {
+    func consume(_ model: [Any], change _: ChangeType) {
         if let products = model as? [Product] {
             data = products
             tableView.reloadData()
         }
     }
 
-    func interests() -> ChangeType {
+    func interests() -> Interests {
         return .groceries
     }
 }

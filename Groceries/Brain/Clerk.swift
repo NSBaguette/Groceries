@@ -10,32 +10,6 @@
 
 import Foundation
 
-enum ChangeType: String {
-    case groceries = "update.groceries"
-    case products = "create.product"
-}
-
-protocol ModelConsumer: class {
-    func consume(_ model: [Any])
-    func interests() -> ChangeType
-}
-
-protocol MortalModelConsumer: ModelConsumer {
-    func injectMortician(_ mortician: Mortician)
-}
-
-protocol Clerk {
-    func subscribe(_ consumer: ModelConsumer, for change: ChangeType)
-    func notify(aboutChange change: ChangeType)
-}
-
-protocol Mortician: class {
-    func remove(_ consumer: ModelConsumer, for change: ChangeType)
-}
-
-protocol CancellableClerk: Clerk, Mortician {
-}
-
 final class ClerkImpl {
     private var controllers = [ChangeType: [ModelConsumer]]()
     private var brain: Brain!
@@ -49,7 +23,47 @@ final class ClerkImpl {
 }
 
 extension ClerkImpl: Clerk {
-    func subscribe(_ consumer: ModelConsumer, for change: ChangeType) {
+    func subscribe(_ consumer: ModelConsumer, for interests: Interests) {
+        if interests.contains(.groceries) {
+            addConsumer(consumer, for: .groceries)
+        }
+
+        if interests.contains(.products) {
+            addConsumer(consumer, for: .products)
+        }
+    }
+
+    func notify(about interests: Interests) {
+        if interests.contains(.products) {
+            notifyAboutProductsUpdate()
+        }
+
+        if interests.contains(.groceries) {
+            notifyAboutGroceriesUpdate()
+        }
+    }
+}
+
+extension ClerkImpl: CancellableClerk {
+    func unsubscribe(_ consumer: ModelConsumer, for interests: Interests) {
+        if interests.contains(.products) {
+            remove(consumer, for: .products)
+        }
+
+        if interests.contains(.groceries) {
+            remove(consumer, for: .groceries)
+        }
+    }
+}
+
+extension ClerkImpl {
+    @objc func mailbox(notification: NSNotification) {
+        if let change = notification.userInfo?[brain.updateNotificationChangeKey()] as? ChangeType {
+            notify(aboutChange: change)
+        }
+    }
+
+    private func addConsumer(_ consumer: ModelConsumer, for change: ChangeType) {
         var array = controllers[change]
         if array == nil {
             array = [ModelConsumer]()
@@ -59,30 +73,20 @@ extension ClerkImpl: Clerk {
         controllers[change] = array
     }
 
-    func notify(aboutChange change: ChangeType) {
-        switch change {
-        case .groceries:
-            notifyAboutGroceriesUpdate()
-        case .products:
-            notifyAboutProductsUpdate()
-        }
-    }
-}
-
-extension ClerkImpl: CancellableClerk {
-    func remove(_ consumer: ModelConsumer, for change: ChangeType) {
+    private func remove(_ consumer: ModelConsumer, for change: ChangeType) {
         var array = controllers[change]
         if let index = array?.index(where: { $0 === consumer }) {
             array?.remove(at: index)
             controllers[change] = array
         }
     }
-}
 
-extension ClerkImpl {
-    @objc func mailbox(notification: NSNotification) {
-        if let change = notification.userInfo?[brain.updateNotificationChangeKey()] as? ChangeType {
-            notify(aboutChange: change)
+    private func notify(aboutChange change: ChangeType) {
+        switch change {
+        case .groceries:
+            notifyAboutGroceriesUpdate()
+        case .products:
+            notifyAboutProductsUpdate()
         }
     }
 
@@ -98,7 +102,7 @@ extension ClerkImpl {
 
             DispatchQueue.main.async {
                 for target in controllers {
-                    target.consume(products)
+                    target.consume(products, change: .groceries)
                 }
             }
         }
@@ -116,7 +120,7 @@ extension ClerkImpl {
 
             DispatchQueue.main.async {
                 for target in controllers {
-                    target.consume(products)
+                    target.consume(products, change: .products)
                 }
             }
         }

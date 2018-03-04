@@ -13,9 +13,11 @@ import Foundation
 struct Product {
     private(set) var uid: Int
     private(set) var name: String
+    private(set) var enqueued: Bool
 
-    init(uid: Int, name: String) {
+    init(uid: Int, name: String, enqueued: Bool) {
         self.uid = uid
         self.name = name
+        self.enqueued = enqueued
     }
 }

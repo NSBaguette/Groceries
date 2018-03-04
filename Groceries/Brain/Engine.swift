@@ -12,17 +12,48 @@ import FMDB
 import Foundation
 
 enum DatabaseAction: String {
-    case testFetch = "SELECT Groceries.Name, Groceries.uid FROM GroceriesLists INNER JOIN Groceries ON GroceriesLists.ProductID=Groceries.uid WHERE GroceriesLists.ListID=1 ORDER BY GroceriesLists.Position"
+    case testGroceriesFetch = """
+    SELECT
+        Groceries.Name,
+        Groceries.uid,
+        1 AS Enqueued
+    FROM GroceriesLists
+    INNER JOIN Groceries
+        ON GroceriesLists.ProductID=Groceries.uid
+        WHERE GroceriesLists.ListID=1
+        ORDER BY GroceriesLists.Position
+    """
     case testDelete = "DELETE FROM GroceriesLists WHERE ListID=1 AND ProductId = ?"
     case testInsert = "INSERT INTO Groceries (Name) VALUES (?)"
-    case testProductsFetch = "SELECT Name, uid FROM Groceries"
+    case testProductsFetch = """
+    SELECT
+        Name,
+        uid,
+        CASE WHEN GroceriesLists.ProductID IS NOT NULL
+            THEN 1
+            ELSE 0
+        END AS Enqueued
+    FROM Groceries
+        LEFT JOIN GroceriesLists
+            ON Groceries.uid = GroceriesLists.ProductID
+            AND GroceriesLists.ListID=1
+    """
     case testEnqueue = "INSERT INTO GroceriesLists (Position, ListID, ProductId) VALUES (?, 1, ?)"
-    case testFetchLastInsertedGrocerie = "SELECT * FROM Groceries WHERE uid = (SELECT MAX(uid) FROM Groceries)"
-}
-
-protocol Engine {
-    func executeFetchBlock(_ block: @escaping (FMDatabase) -> Void)
-    func executeUpdateBlock(_ block: @escaping (FMDatabase) -> Void)
+    case testFetchLastInsertedGrocery = """
+    SELECT
+        Name,
+        uid,
+        CASE WHEN GroceriesLists.ProductID IS NOT NULL
+            THEN 1
+            ELSE 0
+        END AS Enqueued
+    FROM Groceries
+        LEFT JOIN GroceriesLists
+            ON Groceries.uid = GroceriesLists.ProductID
+            AND GroceriesLists.ListID=1
+    ORDER BY uid DESC
+    LIMIT 1
+    """
 }
 
 final class FMDBDatabaseEngine: Engine {
