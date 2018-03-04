@@ -16,7 +16,10 @@ final class SelectProductViewController: UITableViewController {
     private var router: Router?
     private var actor: Actor?
     private weak var mortician: Mortician?
+
     private var data = [Product]()
+    private var searchText: String?
+
     private var searchBar: UISearchBar?
     private var searchResultsScreen: UITableViewController?
     private var searchController: UISearchController?
@@ -76,12 +79,19 @@ extension SelectProductViewController {
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return data.count
+        guard let products = filteredData() else {
+            return 0
+        }
+
+        return products.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! SelectableProductCell
-        let product = data[indexPath.row]
+
+        guard let product = filteredData()?[indexPath.row] else {
+            return cell
+        }
 
         let text = product.name
         let state: SelectableProductCellState = product.enqueued ? .selected : .notSelected
@@ -98,12 +108,23 @@ extension SelectProductViewController {
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let product = data[indexPath.row]
+        guard let product = filteredData()?[indexPath.row] else {
+            return
+        }
+
         if product.enqueued {
             actor?.dequeue(product: product)
         } else {
             actor?.enqueue(product: product)
         }
+    }
+
+    private func filteredData() -> [Product]? {
+        guard let filter = searchText else {
+            return data
+        }
+
+        return data.filter { $0.name.localizedCaseInsensitiveContains(filter) }
     }
 }
 
@@ -125,8 +146,11 @@ extension SelectProductViewController: UISearchBarDelegate {
 //    @available(iOS 2.0, *)
 //    optional public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) // called when text ends editing
 //
-//    @available(iOS 2.0, *)
-//    optional public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) // called when text changes (including clear)
+    public func searchBar(_: UISearchBar, textDidChange searchText: String) {
+        self.searchText = searchText.count > 0 ? searchText : nil
+        tableView.reloadData()
+    }
+
 //
 //    @available(iOS 3.0, *)
 //    optional public func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool // called before text changes
