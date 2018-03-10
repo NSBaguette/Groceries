@@ -105,7 +105,7 @@ extension ClerkImpl {
             guard let products = result else {
                 return
             }
-            
+
             DispatchQueue.main.async {
                 consumers.forEach { $0.consume(products, change: .products) }
             }

@@ -13,21 +13,21 @@ import Foundation
 
 final class WeakMap {
     private typealias Container = NSMapTable<AnyObject, AnyObject>
-    
+
     private let keyOption = NSPointerFunctions.Options.strongMemory
     private let valueOption = NSPointerFunctions.Options.weakMemory
-    
+
     private var storage: Container
-    
+
     init() {
         storage = Container(keyOptions: keyOption, valueOptions: valueOption)
     }
-    
+
     subscript(key: AnyObject) -> AnyObject? {
         get {
             return storage.object(forKey: key)
         }
-        
+
         set {
             if newValue != nil {
                 storage.setObject(newValue, forKey: key)
