@@ -14,28 +14,28 @@ enum SelectableProductCellState {
 }
 
 final class SelectableProductCell: UITableViewCell {
-    @IBOutlet weak var checkmark: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    
+    @IBOutlet var checkmark: UIImageView!
+    @IBOutlet var titleLabel: UILabel!
+
     private var state: SelectableProductCellState = .notSelected
-    
+
     override func awakeFromNib() {
         checkmark?.image = #imageLiteral(resourceName: "checkmark-empty")
     }
-    
+
     func updateState(to value: SelectableProductCellState) {
         guard state != value else {
             return
         }
-        
+
         state = value
         updateInterface()
     }
-    
+
     private func updateInterface() {
         checkmark?.image = checkmarkImage(for: state)
     }
-    
+
     private func checkmarkImage(for state: SelectableProductCellState) -> UIImage {
         switch state {
         case .selected:
@@ -48,9 +48,9 @@ final class SelectableProductCell: UITableViewCell {
 
 extension SelectableProductCell {
     static func nib() -> UINib? {
-        return UINib.init(nibName: "SelectableProductCell", bundle: nil)
+        return UINib(nibName: "SelectableProductCell", bundle: nil)
     }
-    
+
     static func reuseId() -> String {
         return "SelectableProductCell"
     }
