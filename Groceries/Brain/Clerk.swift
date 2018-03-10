@@ -11,7 +11,7 @@
 import Foundation
 
 final class ClerkImpl {
-    private var controllers = [ChangeType: [ModelConsumer]]()
+    private var consumers = ConsumersStorage()
     private var brain: Brain!
 
     init(withBrain brain: Brain) {
@@ -64,21 +64,11 @@ extension ClerkImpl {
     }
 
     private func addConsumer(_ consumer: ModelConsumer, for change: ChangeType) {
-        var array = controllers[change]
-        if array == nil {
-            array = [ModelConsumer]()
-        }
-
-        array?.append(consumer)
-        controllers[change] = array
+        consumers.addObject(consumer, forKey: change)
     }
 
     private func remove(_ consumer: ModelConsumer, for change: ChangeType) {
-        var array = controllers[change]
-        if let index = array?.index(where: { $0 === consumer }) {
-            array?.remove(at: index)
-            controllers[change] = array
-        }
+        consumers.removeObject(consumer, forKey: change)
     }
 
     private func notify(aboutChange change: ChangeType) {
@@ -91,7 +81,7 @@ extension ClerkImpl {
     }
 
     private func notifyAboutGroceriesUpdate() {
-        guard let controllers = self.controllers[.groceries] else {
+        guard let consumers = self.consumers[.groceries] else {
             return
         }
 
@@ -101,15 +91,13 @@ extension ClerkImpl {
             }
 
             DispatchQueue.main.async {
-                for target in controllers {
-                    target.consume(products, change: .groceries)
-                }
+                consumers.forEach { $0.consume(products, change: .groceries) }
             }
         }
     }
 
     private func notifyAboutProductsUpdate() {
-        guard let controllers = self.controllers[.products] else {
+        guard let consumers = self.consumers[.products] else {
             return
         }
 
@@ -117,11 +105,9 @@ extension ClerkImpl {
             guard let products = result else {
                 return
             }
-
+            
             DispatchQueue.main.async {
-                for target in controllers {
-                    target.consume(products, change: .products)
-                }
+                consumers.forEach { $0.consume(products, change: .products) }
             }
         }
     }
