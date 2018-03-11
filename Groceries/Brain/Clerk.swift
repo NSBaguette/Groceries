@@ -12,10 +12,12 @@ import Foundation
 
 final class ClerkImpl {
     private var consumers = ConsumersStorage()
-    private var brain: Brain!
+    private var brain: Brain
+    private var cache: UpdatableCache
 
-    init(withBrain brain: Brain) {
+    init(withBrain brain: Brain, cache: UpdatableCache) {
         self.brain = brain
+        self.cache = cache
 
         let name = NSNotification.Name(brain.updateNotificationName())
         NotificationCenter.default.addObserver(self, selector: #selector(mailbox), name: name, object: nil)
@@ -42,6 +44,11 @@ extension ClerkImpl: Clerk {
             notifyAboutGroceriesUpdate()
         }
     }
+
+    func updateRecords() {
+        updateRecords(about: .groceries)
+        updateRecords(about: .products)
+    }
 }
 
 extension ClerkImpl: CancellableClerk {
@@ -59,7 +66,7 @@ extension ClerkImpl: CancellableClerk {
 extension ClerkImpl {
     @objc func mailbox(notification: NSNotification) {
         if let change = notification.userInfo?[brain.updateNotificationChangeKey()] as? ChangeType {
-            notify(aboutChange: change)
+            updateRecords(about: change)
         }
     }
 
@@ -71,12 +78,44 @@ extension ClerkImpl {
         consumers.removeObject(consumer, forKey: change)
     }
 
-    private func notify(aboutChange change: ChangeType) {
+    private func updateRecords(about change: ChangeType) {
         switch change {
         case .groceries:
-            notifyAboutGroceriesUpdate()
+            updateGroceriesRecords(notify: true)
         case .products:
-            notifyAboutProductsUpdate()
+            updateProductsRecords(notify: true)
+        }
+    }
+
+    private func updateGroceriesRecords(notify: Bool) {
+        brain.fetchGroceries { result in
+            guard let products = result else {
+                return
+            }
+
+            DispatchQueue.main.async { [weak self] in
+                let changed = self?.cache.updateGroceries(products) ?? false
+
+                if notify && changed {
+                    self?.notifyAboutGroceriesUpdate()
+                }
+            }
+        }
+    }
+
+    private func updateProductsRecords(notify: Bool) {
+        brain.fetchProducts { result in
+            guard let products = result else {
+                return
+            }
+
+            DispatchQueue.main.async { [weak self] in
+                let changed = self?.cache.updateProducts(products) ?? false
+
+                if notify && changed {
+                    self?.notifyAboutGroceriesUpdate()
+                }
+            }
         }
     }
 
@@ -85,14 +124,12 @@ extension ClerkImpl {
             return
         }
 
-        brain.fetchGroceries { result in
-            guard let products = result else {
+        DispatchQueue.main.async { [weak self] in
+            guard let products = self?.cache.getGroceries() else {
                 return
             }
 
-            DispatchQueue.main.async {
-                consumers.forEach { $0.consume(products, change: .groceries) }
-            }
+            consumers.forEach { $0.consume(products, change: .groceries) }
         }
     }
 
@@ -101,14 +138,12 @@ extension ClerkImpl {
             return
         }
 
-        brain.fetchProducts { result in
-            guard let products = result else {
+        DispatchQueue.main.async { [weak self] in
+            guard let products = self?.cache.getProducts() else {
                 return
             }
 
-            DispatchQueue.main.async {
-                consumers.forEach { $0.consume(products, change: .products) }
-            }
+            consumers.forEach { $0.consume(products, change: .products) }
         }
     }
 }

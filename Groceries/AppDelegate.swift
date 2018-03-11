@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var router: Router!
     private var actor: Actor!
     private var engine: Engine!
-    private var cache: Cache!
+    private var cache: UpdatableCache!
 
     var window: UIWindow?
 
@@ -26,17 +26,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         engine = FMDBDatabaseEngine(with: path)
         cache = CacheImpl()
         brain = BrainImpl(withEngine: engine, cache: cache)
-        clerk = ClerkImpl(withBrain: brain)
+        clerk = ClerkImpl(withBrain: brain, cache: cache)
         actor = ActorImpl(withBrain: brain)
         router = iOSRouter(withClerk: clerk, actor: actor)
-
-        if let object = cache as? CacheImpl {
-            object.subscribe(clerk: clerk)
-        }
 
         router.presentRootViewController(forWindow: window!)
         window?.makeKeyAndVisible()
 
         return true
+    }
+
+    func applicationDidBecomeActive(_: UIApplication) {
+        clerk.updateRecords()
     }
 }
