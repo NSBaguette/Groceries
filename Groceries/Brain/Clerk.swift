@@ -113,7 +113,7 @@ extension ClerkImpl {
                 let changed = self?.cache.updateProducts(products) ?? false
 
                 if notify && changed {
-                    self?.notifyAboutGroceriesUpdate()
+                    self?.notifyAboutProductsUpdate()
                 }
             }
         }
