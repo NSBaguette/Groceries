@@ -13,6 +13,7 @@ protocol ProductsCache {
     func containsProduct(product: Product) -> Bool
     func containsProduct(withName: String) -> Bool
     func getProduct(withName: String) -> Product?
+    func updateProducts(_ products: [Product]) -> Bool
 }
 
 final class ProductsCacheImpl: ProductsCache {
@@ -34,17 +35,13 @@ final class ProductsCacheImpl: ProductsCache {
         let result = products.first(where: { $0.name == name })
         return result
     }
-}
 
-extension ProductsCacheImpl: ModelConsumer {
-    func interests() -> Interests {
-        return .products
-    }
-
-    func consume(_ model: [Any], change _: ChangeType) {
-        if let result = model as? [Product] {
-            products.removeAll()
-            products.append(contentsOf: result)
+    func updateProducts(_ products: [Product]) -> Bool {
+        guard self.products != products else {
+            return false
         }
+
+        self.products = products
+        return true
     }
 }

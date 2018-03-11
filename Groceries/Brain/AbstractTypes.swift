@@ -35,6 +35,8 @@ protocol MortalModelConsumer: ModelConsumer {
 protocol Clerk {
     func subscribe(_ consumer: ModelConsumer, for inerests: Interests)
     func notify(about interests: Interests)
+
+    func updateRecords()
 }
 
 protocol Mortician: class {

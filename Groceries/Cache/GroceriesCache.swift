@@ -11,6 +11,7 @@ import Foundation
 protocol GroceriesCache {
     func getGroceries() -> [Product]
     func containsGrocery(grocery: Product) -> Bool
+    func updateGroceries(_ groceries: [Product]) -> Bool
 }
 
 final class GroceriesCacheImpl: GroceriesCache {
@@ -23,17 +24,13 @@ final class GroceriesCacheImpl: GroceriesCache {
     func containsGrocery(grocery: Product) -> Bool {
         return groceries.contains(where: { $0.uid == grocery.uid })
     }
-}
 
-extension GroceriesCacheImpl: ModelConsumer {
-    func interests() -> Interests {
-        return .groceries
-    }
-
-    func consume(_ model: [Any], change _: ChangeType) {
-        if let result = model as? [Product] {
-            groceries.removeAll()
-            groceries.append(contentsOf: result)
+    func updateGroceries(_ groceries: [Product]) -> Bool {
+        guard self.groceries != groceries else {
+            return false
         }
+
+        self.groceries = groceries
+        return true
     }
 }

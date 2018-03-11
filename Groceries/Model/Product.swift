@@ -21,3 +21,9 @@ struct Product {
         self.enqueued = enqueued
     }
 }
+
+extension Product: Equatable {
+    static func == (lhs: Product, rhs: Product) -> Bool {
+        return lhs.uid == rhs.uid
+    }
+}

@@ -13,20 +13,17 @@ import Foundation
 protocol Cache: ProductsCache, GroceriesCache {
 }
 
+protocol UpdatableCache: Cache {
+    func updateProducts(_ products: [Product]) -> Bool
+    func updateGroceries(_ groceries: [Product]) -> Bool
+}
+
 final class CacheImpl {
     private let productsCache = ProductsCacheImpl()
     private let groceriesCache = GroceriesCacheImpl()
-
-    func subscribe(clerk: Clerk) {
-        clerk.subscribe(productsCache, for: productsCache.interests())
-        clerk.notify(about: productsCache.interests())
-
-        clerk.subscribe(groceriesCache, for: groceriesCache.interests())
-        clerk.notify(about: groceriesCache.interests())
-    }
 }
 
-extension CacheImpl: Cache {
+extension CacheImpl: UpdatableCache {
     func getGroceries() -> [Product] {
         return groceriesCache.getGroceries()
     }
@@ -49,5 +46,13 @@ extension CacheImpl: Cache {
 
     func getProduct(withName name: String) -> Product? {
         return productsCache.getProduct(withName: name)
+    }
+
+    func updateProducts(_ products: [Product]) -> Bool {
+        return productsCache.updateProducts(products)
+    }
+
+    func updateGroceries(_ groceries: [Product]) -> Bool {
+        return groceriesCache.updateGroceries(groceries)
     }
 }
