@@ -24,6 +24,9 @@ struct Product {
 
 extension Product: Equatable {
     static func == (lhs: Product, rhs: Product) -> Bool {
-        return lhs.uid == rhs.uid
+        return
+            lhs.uid == rhs.uid &&
+            lhs.name == rhs.name &&
+            lhs.enqueued == rhs.enqueued
     }
 }
