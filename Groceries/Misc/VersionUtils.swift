@@ -18,6 +18,6 @@ struct VersionUtils {
             return "v0.0"
         }
         
-        return "v\(version).\(build)"
+        return "v\(version) (\(build))"
     }
 }
