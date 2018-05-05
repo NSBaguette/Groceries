@@ -27,6 +27,9 @@ final class ListViewController: UITableViewController {
         let action = #selector(addItemButtonPressed)
         addItemButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: action)
         navigationItem.rightBarButtonItem = addItemButton
+        
+        let version = VersionUtils.loadVersion()
+        self.title = version
     }
 
     @objc func addItemButtonPressed(sender _: Any) {
