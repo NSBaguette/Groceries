@@ -9,15 +9,23 @@
 import Foundation
 
 struct VersionUtils {
+    private enum Keys: String {
+        case version = "CFBundleShortVersionString"
+        case build = "CFBundleVersion"
+    }
+    
+    private static let emptyVersion = "v0"
+    private static let format = "v%@ (%@)"
+    
     static func loadVersion() -> String {
         guard
             let dict = Bundle.main.infoDictionary,
-            let version = dict["CFBundleShortVersionString"] as? String,
-            let build = dict["CFBundleVersion"] as? String
+            let version = dict[Keys.version.rawValue] as? String,
+            let build = dict[Keys.build.rawValue] as? String
         else {
-            return "v0.0"
+            return emptyVersion
         }
         
-        return "v\(version) (\(build))"
+        return String(format: format, version, build)
     }
 }
