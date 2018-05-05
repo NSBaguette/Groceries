@@ -44,7 +44,7 @@ struct iOSRouter: Router {
     }
 
     private func createGroceriesController() -> UIViewController {
-        let controller = ViewController(style: .grouped)
+        let controller = ListViewController(style: .grouped)
         configure(controller)
 
         return controller

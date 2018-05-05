@@ -9,7 +9,7 @@
 import FMDB
 import UIKit
 
-final class ViewController: UITableViewController {
+final class ListViewController: UITableViewController {
     private var addItemButton: UIBarButtonItem?
     private var data = [Product]()
     private var router: Router?
@@ -34,7 +34,7 @@ final class ViewController: UITableViewController {
     }
 }
 
-extension ViewController: ModelConsumer {
+extension ListViewController: ModelConsumer {
     func consume(_ model: [Any], change _: ChangeType) {
         if let products = model as? [Product] {
             data = products
@@ -47,20 +47,20 @@ extension ViewController: ModelConsumer {
     }
 }
 
-extension ViewController: RoutePleader {
+extension ListViewController: RoutePleader {
     func injectRouter(_ router: Router) {
         self.router = router
     }
 }
 
-extension ViewController: ActionPleader {
+extension ListViewController: ActionPleader {
     func injectActor(_ actor: Actor) {
         self.actor = actor
     }
 }
 
 // UITableViewDataSource
-extension ViewController {
+extension ListViewController {
     override func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
@@ -77,7 +77,7 @@ extension ViewController {
 }
 
 // UITableViewDelegate
-extension ViewController {
+extension ListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
