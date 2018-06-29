@@ -31,29 +31,11 @@ final class SelectProductViewController: UITableViewController {
 
         constructInterface()
     }
-
-    func constructInterface() {
-        tableView.register(SelectableProductCell.nib(),
-                           forCellReuseIdentifier: SelectableProductCell.reuseId())
-
-        var action = #selector(doneButtonAction)
-        doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: action)
-        navigationItem.rightBarButtonItem = doneButton
-
-        action = #selector(addNewProductAction)
-        addNewProductButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: action)
-        navigationItem.leftBarButtonItem = addNewProductButton
-
-        searchBar = UISearchBar()
-        searchBar?.delegate = self
-        navigationItem.titleView = searchBar!
-//        searchResultsScreen = SearchProductsResultsController(style: .grouped)
-//        searchController = UISearchController(searchResultsController: searchResultsScreen)
-//        searchController?.searchResultsUpdater = self
-//        searchController?.hidesNavigationBarDuringPresentation = false
-
-//        self.definesPresentationContext = true
-//        navigationItem.searchController = searchController!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        searchBar?.becomeFirstResponder()
     }
 
     @objc func doneButtonAction(sender _: Any) {
@@ -68,6 +50,33 @@ final class SelectProductViewController: UITableViewController {
 
     deinit {
         mortician?.unsubscribe(self, for: interests())
+    }
+}
+
+// MARK: Private stuff
+private extension SelectProductViewController {
+    func constructInterface() {
+        tableView.register(SelectableProductCell.nib(),
+                           forCellReuseIdentifier: SelectableProductCell.reuseId())
+        
+        var action = #selector(doneButtonAction)
+        doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: action)
+        navigationItem.rightBarButtonItem = doneButton
+        
+        action = #selector(addNewProductAction)
+        addNewProductButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: action)
+        navigationItem.leftBarButtonItem = addNewProductButton
+        
+        searchBar = UISearchBar()
+        searchBar?.delegate = self
+        navigationItem.titleView = searchBar!
+        //        searchResultsScreen = SearchProductsResultsController(style: .grouped)
+        //        searchController = UISearchController(searchResultsController: searchResultsScreen)
+        //        searchController?.searchResultsUpdater = self
+        //        searchController?.hidesNavigationBarDuringPresentation = false
+        
+        //        self.definesPresentationContext = true
+        //        navigationItem.searchController = searchController!
     }
 }
 
@@ -146,8 +155,8 @@ extension SelectProductViewController: UISearchBarDelegate {
 //    @available(iOS 2.0, *)
 //    optional public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) // called when text ends editing
 //
-    public func searchBar(_: UISearchBar, textDidChange searchText: String) {
-        self.searchText = searchText.count > 0 ? searchText : nil
+    public func searchBar(_: UISearchBar, textDidChange text: String) {
+        searchText = text.count > 0 ? text : nil
         tableView.reloadData()
     }
 
