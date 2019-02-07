@@ -1,0 +1,20 @@
+DatabaseEngine
+    - give means to update/fetch data
+    
+    FMDBDatabaseEngine
+        - concrete class that can manipulate FMDB
+
+Librarian
+    - knows about pathes
+
+Brain
+    - wraps DatabaseEngien and provides API to manipulate data.
+
+Router
+    - 'glue' that holds controllers and knows how to perform transitions, etc.
+
+UpdateCoordinator
+    - listens to events and notifies interested parties about changes.
+
+Actor
+    - take commands and executes them

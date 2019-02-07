@@ -1,0 +1,5 @@
+- when working on feature create new branch for it.
+    - branch name should be $username/$feature
+- when commit uncomplete changes mark them with [WIP]
+- when you make refactoring changes, mark them with [Refactor]
+- when adding new/editing docs mark commit with [Docs]
