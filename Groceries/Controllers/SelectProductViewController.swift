@@ -43,9 +43,9 @@ final class SelectProductViewController: UITableViewController {
     }
 
     @objc func addNewProductAction(sender _: Any) {
-        if let text = searchBar?.text {
-            actor?.createProduct(name: text)
-        }
+        guard let text = searchBar?.text, text.count > 0 else { return }
+        
+        actor?.createProduct(name: text)
     }
 
     deinit {
@@ -65,6 +65,7 @@ private extension SelectProductViewController {
         
         action = #selector(addNewProductAction)
         addNewProductButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: action)
+        addNewProductButton?.isEnabled = false
         navigationItem.leftBarButtonItem = addNewProductButton
         
         searchBar = UISearchBar()
@@ -158,6 +159,8 @@ extension SelectProductViewController: UISearchBarDelegate {
     public func searchBar(_: UISearchBar, textDidChange text: String) {
         searchText = text.count > 0 ? text : nil
         tableView.reloadData()
+        
+        self.addNewProductButton?.isEnabled = (searchText != nil)
     }
 
 //
