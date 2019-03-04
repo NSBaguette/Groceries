@@ -111,7 +111,8 @@
 				695E662C222DC3FE00189A3D /* Info.plist */,
 				695E662D222DC3FE00189A3D /* main.m */,
 			);
-			path = Groceries;
+			name = Groceries;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		695E6636222DC3FE00189A3D /* GroceriesTests */ = {
@@ -120,7 +121,8 @@
 				695E6637222DC3FE00189A3D /* GroceriesTests.m */,
 				695E6639222DC3FE00189A3D /* Info.plist */,
 			);
-			path = GroceriesTests;
+			name = GroceriesTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		695E6641222DC3FE00189A3D /* GroceriesUITests */ = {
@@ -129,7 +131,8 @@
 				695E6642222DC3FE00189A3D /* GroceriesUITests.m */,
 				695E6644222DC3FE00189A3D /* Info.plist */,
 			);
-			path = GroceriesUITests;
+			name = GroceriesUITests;
+			path = UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -436,7 +439,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Groceries/Info.plist;
+				DEVELOPMENT_TEAM = ZYRA39J73U;
+				INFOPLIST_FILE = Source/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,7 +456,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Groceries/Info.plist;
+				DEVELOPMENT_TEAM = ZYRA39J73U;
+				INFOPLIST_FILE = Source/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
