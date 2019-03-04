@@ -10,7 +10,9 @@ import FMDB
 import UIKit
 
 final class ListViewController: UITableViewController {
-    private var addItemButton: UIBarButtonItem?
+    private var addItemButton: UIBarButtonItem!
+    private var shareButton: UIBarButtonItem!
+    
     private var data = [Product]()
     private var router: Router?
     private var actor: Actor?
@@ -24,16 +26,49 @@ final class ListViewController: UITableViewController {
         view.backgroundColor = UIColor.white
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
-        let action = #selector(addItemButtonPressed)
-        addItemButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: action)
-        navigationItem.rightBarButtonItem = addItemButton
+        let addItemHandler = #selector(addItemAction)
+        addItemButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: addItemHandler)
+        
+        let shareHandler = #selector(shareAction)
+        shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: shareHandler)
+        
+        navigationItem.rightBarButtonItems = [addItemButton, shareButton]
         
         let version = VersionUtils.loadVersion()
         self.title = version
     }
 
-    @objc func addItemButtonPressed(sender _: Any) {
+    @objc func addItemAction(sender _: Any) {
         router?.presentProductSelectionScreen(pleader: self)
+    }
+    
+    @objc func shareAction(sender _: Any) {
+        /*<<**************TEST_CODE_BEGIN**************>>*/
+        // IMPLEMENT ME
+        /*<<***************TEST_CODE_END***************>>*/
+    }
+    
+    // UITableViewDataSource
+    override func numberOfSections(in _: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        return data.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        cell.textLabel?.text = data[indexPath.row].name
+        return cell
+    }
+    
+    // UITableViewDelegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let product = data[indexPath.row]
+        actor?.purchaseProduct(product: product)
     }
 }
 
@@ -59,32 +94,5 @@ extension ListViewController: RoutePleader {
 extension ListViewController: ActionPleader {
     func injectActor(_ actor: Actor) {
         self.actor = actor
-    }
-}
-
-// UITableViewDataSource
-extension ListViewController {
-    override func numberOfSections(in _: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return data.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.textLabel?.text = data[indexPath.row].name
-        return cell
-    }
-}
-
-// UITableViewDelegate
-extension ListViewController {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-
-        let product = data[indexPath.row]
-        actor?.purchaseProduct(product: product)
     }
 }
