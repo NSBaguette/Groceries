@@ -8,18 +8,32 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
+//TODO: Move to some kind of assembler
+#import "Groceries-Swift.h"
+#import "Librarian/NBGLibrarian.h"
+#import "Database/NBGDatabaseEngine.h"
 
+@interface AppDelegate ()
+@property (strong, nonatomic) UIViewController *controller;
+@property (strong, nonatomic) NBGDatabaseEngine *engine;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    [self.window makeKeyAndVisible];
+    
+    self.controller = [[ProductsListViewController alloc] init];
+    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:self.controller];
+    self.window.rootViewController = navigation;
+
+    //TODO: Move to some kind of assembler
+    NBGDatabaseEngine *engine = [[NBGDatabaseEngine alloc] initWithUrl:[NBGLibrarian databaseUrl]];
+    
     return YES;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

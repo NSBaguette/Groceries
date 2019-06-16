@@ -7,14 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		694F697822B6A9E200C6989D /* ProductsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F697722B6A9E200C6989D /* ProductsListViewController.swift */; };
+		694F697A22B6AF5D00C6989D /* ProductsListViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F697922B6AF5D00C6989D /* ProductsListViewStyle.swift */; };
+		694F697C22B6B43000C6989D /* UICollectionViewCell+ReuseId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F697B22B6B43000C6989D /* UICollectionViewCell+ReuseId.swift */; };
+		694F697F22B6BE7A00C6989D /* sql in Resources */ = {isa = PBXBuildFile; fileRef = 694F697E22B6BE7A00C6989D /* sql */; };
+		694F698122B6C0BB00C6989D /* ProductsListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F698022B6C0BB00C6989D /* ProductsListCollectionViewCell.swift */; };
+		694F698322B6CAB800C6989D /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F698222B6CAB800C6989D /* Palette.swift */; };
 		695E6620222DC3FC00189A3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 695E661F222DC3FC00189A3D /* AppDelegate.m */; };
-		695E6623222DC3FC00189A3D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 695E6622222DC3FC00189A3D /* ViewController.m */; };
-		695E6626222DC3FC00189A3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695E6624222DC3FC00189A3D /* Main.storyboard */; };
 		695E6628222DC3FE00189A3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695E6627222DC3FE00189A3D /* Assets.xcassets */; };
 		695E662B222DC3FE00189A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695E6629222DC3FE00189A3D /* LaunchScreen.storyboard */; };
 		695E662E222DC3FE00189A3D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 695E662D222DC3FE00189A3D /* main.m */; };
 		695E6638222DC3FE00189A3D /* GroceriesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 695E6637222DC3FE00189A3D /* GroceriesTests.m */; };
 		695E6643222DC3FE00189A3D /* GroceriesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 695E6642222DC3FE00189A3D /* GroceriesUITests.m */; };
+		69EF40C522B01888002D3363 /* NBGDatabaseEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EF40C422B01888002D3363 /* NBGDatabaseEngine.m */; };
+		69EF40CC22B01B44002D3363 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EF40CA22B01B44002D3363 /* FMDB.framework */; };
+		69EF40CD22B01B45002D3363 /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EF40CB22B01B44002D3363 /* PureLayout.framework */; };
+		69EF40D322B02F71002D3363 /* NSString+NBGSQLStatements.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EF40D222B02F71002D3363 /* NSString+NBGSQLStatements.m */; };
+		69EF40D622B0329C002D3363 /* NBGDatabaseEngine+Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EF40D522B0329C002D3363 /* NBGDatabaseEngine+Debug.m */; };
+		69EF40DA22B033B6002D3363 /* NBGLibrarian.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EF40D922B033B6002D3363 /* NBGLibrarian.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,12 +45,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		690CEF7E22B37EB100AC3F8D /* NBGDatabaseEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBGDatabaseEngine.h; sourceTree = "<group>"; };
+		694F697622B6A9E200C6989D /* Groceries-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Groceries-Bridging-Header.h"; sourceTree = "<group>"; };
+		694F697722B6A9E200C6989D /* ProductsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListViewController.swift; sourceTree = "<group>"; };
+		694F697922B6AF5D00C6989D /* ProductsListViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListViewStyle.swift; sourceTree = "<group>"; };
+		694F697B22B6B43000C6989D /* UICollectionViewCell+ReuseId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+ReuseId.swift"; sourceTree = "<group>"; };
+		694F697E22B6BE7A00C6989D /* sql */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sql; sourceTree = SOURCE_ROOT; };
+		694F698022B6C0BB00C6989D /* ProductsListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListCollectionViewCell.swift; sourceTree = "<group>"; };
+		694F698222B6CAB800C6989D /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		695E661B222DC3FC00189A3D /* Groceries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groceries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695E661E222DC3FC00189A3D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		695E661F222DC3FC00189A3D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		695E6621222DC3FC00189A3D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		695E6622222DC3FC00189A3D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		695E6625222DC3FC00189A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		695E6627222DC3FE00189A3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		695E662A222DC3FE00189A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		695E662C222DC3FE00189A3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +66,17 @@
 		695E663E222DC3FE00189A3D /* GroceriesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceriesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		695E6642222DC3FE00189A3D /* GroceriesUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroceriesUITests.m; sourceTree = "<group>"; };
 		695E6644222DC3FE00189A3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69EF40C422B01888002D3363 /* NBGDatabaseEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBGDatabaseEngine.m; sourceTree = "<group>"; };
+		69EF40C722B01971002D3363 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
+		69EF40CA22B01B44002D3363 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/iOS/FMDB.framework; sourceTree = SOURCE_ROOT; };
+		69EF40CB22B01B44002D3363 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = SOURCE_ROOT; };
+		69EF40CF22B01F74002D3363 /* DatabaseEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseEngine.h; sourceTree = "<group>"; };
+		69EF40D122B02F71002D3363 /* NSString+NBGSQLStatements.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+NBGSQLStatements.h"; sourceTree = "<group>"; };
+		69EF40D222B02F71002D3363 /* NSString+NBGSQLStatements.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+NBGSQLStatements.m"; sourceTree = "<group>"; };
+		69EF40D422B0329C002D3363 /* NBGDatabaseEngine+Debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NBGDatabaseEngine+Debug.h"; sourceTree = "<group>"; };
+		69EF40D522B0329C002D3363 /* NBGDatabaseEngine+Debug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NBGDatabaseEngine+Debug.m"; sourceTree = "<group>"; };
+		69EF40D822B033B6002D3363 /* NBGLibrarian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBGLibrarian.h; sourceTree = "<group>"; };
+		69EF40D922B033B6002D3363 /* NBGLibrarian.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBGLibrarian.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69EF40CD22B01B45002D3363 /* PureLayout.framework in Frameworks */,
+				69EF40CC22B01B44002D3363 /* FMDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,10 +106,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		694F697D22B6BBF900C6989D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				694F697722B6A9E200C6989D /* ProductsListViewController.swift */,
+				694F697922B6AF5D00C6989D /* ProductsListViewStyle.swift */,
+				694F698022B6C0BB00C6989D /* ProductsListCollectionViewCell.swift */,
+				694F698222B6CAB800C6989D /* Palette.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		695E6612222DC3FC00189A3D = {
 			isa = PBXGroup;
 			children = (
 				695E661D222DC3FC00189A3D /* Groceries */,
+				69EF40C222B01440002D3363 /* Resources */,
+				69EF40C122B01410002D3363 /* Supporting Files */,
+				69EF40C922B01B2D002D3363 /* Frameworks */,
 				695E6636222DC3FE00189A3D /* GroceriesTests */,
 				695E6641222DC3FE00189A3D /* GroceriesUITests */,
 				695E661C222DC3FC00189A3D /* Products */,
@@ -101,15 +143,12 @@
 		695E661D222DC3FC00189A3D /* Groceries */ = {
 			isa = PBXGroup;
 			children = (
+				694F697D22B6BBF900C6989D /* UI */,
+				69EF40D022B02F4B002D3363 /* Extensions */,
+				69EF40C622B0188C002D3363 /* Database */,
+				69EF40DB22B0346E002D3363 /* Librarian */,
 				695E661E222DC3FC00189A3D /* AppDelegate.h */,
 				695E661F222DC3FC00189A3D /* AppDelegate.m */,
-				695E6621222DC3FC00189A3D /* ViewController.h */,
-				695E6622222DC3FC00189A3D /* ViewController.m */,
-				695E6624222DC3FC00189A3D /* Main.storyboard */,
-				695E6627222DC3FE00189A3D /* Assets.xcassets */,
-				695E6629222DC3FE00189A3D /* LaunchScreen.storyboard */,
-				695E662C222DC3FE00189A3D /* Info.plist */,
-				695E662D222DC3FE00189A3D /* main.m */,
 			);
 			name = Groceries;
 			path = Source;
@@ -135,6 +174,75 @@
 			path = UITests;
 			sourceTree = "<group>";
 		};
+		69EF40C122B01410002D3363 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				694F697E22B6BE7A00C6989D /* sql */,
+				694F697622B6A9E200C6989D /* Groceries-Bridging-Header.h */,
+				69EF40C722B01971002D3363 /* Cartfile */,
+				695E662C222DC3FE00189A3D /* Info.plist */,
+				695E662D222DC3FE00189A3D /* main.m */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		69EF40C222B01440002D3363 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				695E6629222DC3FE00189A3D /* LaunchScreen.storyboard */,
+				695E6627222DC3FE00189A3D /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		69EF40C622B0188C002D3363 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				69EF40D722B03372002D3363 /* Extensions */,
+				69EF40CF22B01F74002D3363 /* DatabaseEngine.h */,
+				690CEF7E22B37EB100AC3F8D /* NBGDatabaseEngine.h */,
+				69EF40C422B01888002D3363 /* NBGDatabaseEngine.m */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		69EF40C922B01B2D002D3363 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				69EF40CA22B01B44002D3363 /* FMDB.framework */,
+				69EF40CB22B01B44002D3363 /* PureLayout.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		69EF40D022B02F4B002D3363 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				69EF40D122B02F71002D3363 /* NSString+NBGSQLStatements.h */,
+				69EF40D222B02F71002D3363 /* NSString+NBGSQLStatements.m */,
+				694F697B22B6B43000C6989D /* UICollectionViewCell+ReuseId.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		69EF40D722B03372002D3363 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				69EF40D422B0329C002D3363 /* NBGDatabaseEngine+Debug.h */,
+				69EF40D522B0329C002D3363 /* NBGDatabaseEngine+Debug.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		69EF40DB22B0346E002D3363 /* Librarian */ = {
+			isa = PBXGroup;
+			children = (
+				69EF40D822B033B6002D3363 /* NBGLibrarian.h */,
+				69EF40D922B033B6002D3363 /* NBGLibrarian.m */,
+			);
+			path = Librarian;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,6 +253,7 @@
 				695E6617222DC3FC00189A3D /* Sources */,
 				695E6618222DC3FC00189A3D /* Frameworks */,
 				695E6619222DC3FC00189A3D /* Resources */,
+				69EF40CE22B01B5D002D3363 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -202,6 +311,7 @@
 				TargetAttributes = {
 					695E661A222DC3FC00189A3D = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					695E6632222DC3FE00189A3D = {
 						CreatedOnToolsVersion = 10.1;
@@ -240,7 +350,7 @@
 			files = (
 				695E662B222DC3FE00189A3D /* LaunchScreen.storyboard in Resources */,
 				695E6628222DC3FE00189A3D /* Assets.xcassets in Resources */,
-				695E6626222DC3FC00189A3D /* Main.storyboard in Resources */,
+				694F697F22B6BE7A00C6989D /* sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,14 +370,46 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		69EF40CE22B01B5D002D3363 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/FMDB.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PureLayout.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FMDB.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PureLayout.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		695E6617222DC3FC00189A3D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				695E6623222DC3FC00189A3D /* ViewController.m in Sources */,
+				694F697C22B6B43000C6989D /* UICollectionViewCell+ReuseId.swift in Sources */,
+				69EF40D322B02F71002D3363 /* NSString+NBGSQLStatements.m in Sources */,
+				69EF40DA22B033B6002D3363 /* NBGLibrarian.m in Sources */,
+				69EF40D622B0329C002D3363 /* NBGDatabaseEngine+Debug.m in Sources */,
 				695E662E222DC3FE00189A3D /* main.m in Sources */,
+				694F698322B6CAB800C6989D /* Palette.swift in Sources */,
+				694F698122B6C0BB00C6989D /* ProductsListCollectionViewCell.swift in Sources */,
 				695E6620222DC3FC00189A3D /* AppDelegate.m in Sources */,
+				694F697822B6A9E200C6989D /* ProductsListViewController.swift in Sources */,
+				694F697A22B6AF5D00C6989D /* ProductsListViewStyle.swift in Sources */,
+				69EF40C522B01888002D3363 /* NBGDatabaseEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,14 +445,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		695E6624222DC3FC00189A3D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				695E6625222DC3FC00189A3D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		695E6629222DC3FE00189A3D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -438,15 +572,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZYRA39J73U;
-				INFOPLIST_FILE = Source/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = ".//Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.twealm.Groceries;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/Supporting Files/Groceries-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -455,15 +597,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZYRA39J73U;
-				INFOPLIST_FILE = Source/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = ".//Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.twealm.Groceries;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$SRCROOT/Supporting Files/Groceries-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -471,6 +620,7 @@
 		695E664B222DC3FE00189A3D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GroceriesTests/Info.plist;
@@ -489,6 +639,7 @@
 		695E664C222DC3FE00189A3D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GroceriesTests/Info.plist;
@@ -507,6 +658,7 @@
 		695E664E222DC3FE00189A3D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GroceriesUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -524,6 +676,7 @@
 		695E664F222DC3FE00189A3D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GroceriesUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
