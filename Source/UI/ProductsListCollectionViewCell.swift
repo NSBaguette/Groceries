@@ -10,6 +10,18 @@ import UIKit
 
 struct ProductListCellModel {
     let title: String
+
+    init(product: NBGProduct) {
+        title = product.name
+    }
+
+    private init(title: String) {
+        self.title = title
+    }
+
+    static func errorModel() -> ProductListCellModel {
+        return ProductListCellModel(title: "DAS ERROR")
+    }
 }
 
 final class ProductsListCollectionViewCell: UICollectionViewCell {

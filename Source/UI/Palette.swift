@@ -9,6 +9,6 @@
 import UIKit
 
 final class Palette {
-    static let bonjour = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.00)
-    static let desertStorm = UIColor(red:0.97, green:0.97, blue:0.97, alpha:1.00)
+    static let bonjour = UIColor(named: "bonjour")!
+    static let desertStorm = UIColor(named: "desertStorm")!
 }

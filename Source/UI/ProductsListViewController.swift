@@ -11,6 +11,8 @@ import UIKit
 final class ProductsListViewController: UIViewController {
     private let collectionView: UICollectionView
     private let layout: UICollectionViewFlowLayout
+    @objc public var productsFetcher: ProductsFetcher?
+    private var products: [ProductListCellModel]?
 
     init() {
         layout = UICollectionViewFlowLayout()
@@ -25,6 +27,15 @@ final class ProductsListViewController: UIViewController {
         configureFlowLayout()
         configureSubviewsLayout()
         view.backgroundColor = ProductsListViewStyle.backgroundColor
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+
+        productsFetcher?.fetchProducts({ [weak self] products in
+            self?.products = products.map { ProductListCellModel(product: $0) }
+            self?.collectionView.reloadData()
+        })
     }
 
     private func configureCollectionView() {
@@ -62,13 +73,13 @@ extension ProductsListViewController: UICollectionViewDelegate {}
 
 extension ProductsListViewController: UICollectionViewDataSource {
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return 20
+        return self.products?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ProductsListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.backgroundColor = ProductsListViewStyle.cellBackgroundColor
-        cell.display(model: ProductListCellModel(title: "\(String(describing: indexPath))"))
+        cell.display(model: products?[indexPath.row] ?? ProductListCellModel.errorModel())
         return cell
     }
 }

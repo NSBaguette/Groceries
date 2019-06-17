@@ -13,6 +13,8 @@
 		694F697F22B6BE7A00C6989D /* sql in Resources */ = {isa = PBXBuildFile; fileRef = 694F697E22B6BE7A00C6989D /* sql */; };
 		694F698122B6C0BB00C6989D /* ProductsListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F698022B6C0BB00C6989D /* ProductsListCollectionViewCell.swift */; };
 		694F698322B6CAB800C6989D /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F698222B6CAB800C6989D /* Palette.swift */; };
+		694F698922B827B800C6989D /* ProductsFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F698822B827B800C6989D /* ProductsFetcher.m */; };
+		694F698C22B8339100C6989D /* NBGProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F698B22B8339100C6989D /* NBGProduct.m */; };
 		695E6620222DC3FC00189A3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 695E661F222DC3FC00189A3D /* AppDelegate.m */; };
 		695E6628222DC3FE00189A3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695E6627222DC3FE00189A3D /* Assets.xcassets */; };
 		695E662B222DC3FE00189A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695E6629222DC3FE00189A3D /* LaunchScreen.storyboard */; };
@@ -53,6 +55,10 @@
 		694F697E22B6BE7A00C6989D /* sql */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sql; sourceTree = SOURCE_ROOT; };
 		694F698022B6C0BB00C6989D /* ProductsListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListCollectionViewCell.swift; sourceTree = "<group>"; };
 		694F698222B6CAB800C6989D /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		694F698722B827B800C6989D /* ProductsFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductsFetcher.h; path = Source/ProductsFetcher.h; sourceTree = SOURCE_ROOT; };
+		694F698822B827B800C6989D /* ProductsFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductsFetcher.m; path = Source/ProductsFetcher.m; sourceTree = SOURCE_ROOT; };
+		694F698A22B8339100C6989D /* NBGProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBGProduct.h; sourceTree = "<group>"; };
+		694F698B22B8339100C6989D /* NBGProduct.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBGProduct.m; sourceTree = "<group>"; };
 		695E661B222DC3FC00189A3D /* Groceries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groceries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695E661E222DC3FC00189A3D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		695E661F222DC3FC00189A3D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -143,12 +149,16 @@
 		695E661D222DC3FC00189A3D /* Groceries */ = {
 			isa = PBXGroup;
 			children = (
-				694F697D22B6BBF900C6989D /* UI */,
 				69EF40D022B02F4B002D3363 /* Extensions */,
 				69EF40C622B0188C002D3363 /* Database */,
 				69EF40DB22B0346E002D3363 /* Librarian */,
+				694F697D22B6BBF900C6989D /* UI */,
 				695E661E222DC3FC00189A3D /* AppDelegate.h */,
 				695E661F222DC3FC00189A3D /* AppDelegate.m */,
+				694F698722B827B800C6989D /* ProductsFetcher.h */,
+				694F698822B827B800C6989D /* ProductsFetcher.m */,
+				694F698A22B8339100C6989D /* NBGProduct.h */,
+				694F698B22B8339100C6989D /* NBGProduct.m */,
 			);
 			name = Groceries;
 			path = Source;
@@ -405,11 +415,13 @@
 				69EF40D622B0329C002D3363 /* NBGDatabaseEngine+Debug.m in Sources */,
 				695E662E222DC3FE00189A3D /* main.m in Sources */,
 				694F698322B6CAB800C6989D /* Palette.swift in Sources */,
+				694F698922B827B800C6989D /* ProductsFetcher.m in Sources */,
 				694F698122B6C0BB00C6989D /* ProductsListCollectionViewCell.swift in Sources */,
 				695E6620222DC3FC00189A3D /* AppDelegate.m in Sources */,
 				694F697822B6A9E200C6989D /* ProductsListViewController.swift in Sources */,
 				694F697A22B6AF5D00C6989D /* ProductsListViewStyle.swift in Sources */,
 				69EF40C522B01888002D3363 /* NBGDatabaseEngine.m in Sources */,
+				694F698C22B8339100C6989D /* NBGProduct.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
