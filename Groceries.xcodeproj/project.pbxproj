@@ -7,26 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69129D0222CBF44D00B61A00 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 69129D0022CBF44D00B61A00 /* Model.xcdatamodeld */; };
+		691EC3DD22CD473E00AFFB38 /* AisleEntity+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EC3CB22CD473E00AFFB38 /* AisleEntity+CoreDataClass.m */; };
+		691EC3DE22CD473E00AFFB38 /* AisleEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EC3CC22CD473E00AFFB38 /* AisleEntity+CoreDataProperties.m */; };
+		691EC3DF22CD473E00AFFB38 /* ListEntity+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EC3CF22CD473E00AFFB38 /* ListEntity+CoreDataClass.m */; };
+		691EC3E022CD473E00AFFB38 /* ListEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EC3D022CD473E00AFFB38 /* ListEntity+CoreDataProperties.m */; };
+		691EC3E122CD473E00AFFB38 /* UnitEntity+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EC3D322CD473E00AFFB38 /* UnitEntity+CoreDataClass.m */; };
+		691EC3E222CD473E00AFFB38 /* UnitEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EC3D422CD473E00AFFB38 /* UnitEntity+CoreDataProperties.m */; };
+		691EC3E322CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EC3D722CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataClass.m */; };
+		691EC3E422CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EC3D822CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataProperties.m */; };
+		691EC3E522CD473E00AFFB38 /* ProductEntity+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EC3DB22CD473E00AFFB38 /* ProductEntity+CoreDataClass.m */; };
+		691EC3E622CD473E00AFFB38 /* ProductEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EC3DC22CD473E00AFFB38 /* ProductEntity+CoreDataProperties.m */; };
 		694F697822B6A9E200C6989D /* ProductsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F697722B6A9E200C6989D /* ProductsListViewController.swift */; };
 		694F697A22B6AF5D00C6989D /* ProductsListViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F697922B6AF5D00C6989D /* ProductsListViewStyle.swift */; };
 		694F697C22B6B43000C6989D /* UICollectionViewCell+ReuseId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F697B22B6B43000C6989D /* UICollectionViewCell+ReuseId.swift */; };
-		694F697F22B6BE7A00C6989D /* sql in Resources */ = {isa = PBXBuildFile; fileRef = 694F697E22B6BE7A00C6989D /* sql */; };
 		694F698122B6C0BB00C6989D /* ProductsListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F698022B6C0BB00C6989D /* ProductsListCollectionViewCell.swift */; };
 		694F698322B6CAB800C6989D /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F698222B6CAB800C6989D /* Palette.swift */; };
-		694F698922B827B800C6989D /* ProductsFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F698822B827B800C6989D /* ProductsFetcher.m */; };
-		694F698C22B8339100C6989D /* NBGProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F698B22B8339100C6989D /* NBGProduct.m */; };
 		695E6620222DC3FC00189A3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 695E661F222DC3FC00189A3D /* AppDelegate.m */; };
 		695E6628222DC3FE00189A3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695E6627222DC3FE00189A3D /* Assets.xcassets */; };
 		695E662B222DC3FE00189A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695E6629222DC3FE00189A3D /* LaunchScreen.storyboard */; };
 		695E662E222DC3FE00189A3D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 695E662D222DC3FE00189A3D /* main.m */; };
 		695E6638222DC3FE00189A3D /* GroceriesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 695E6637222DC3FE00189A3D /* GroceriesTests.m */; };
 		695E6643222DC3FE00189A3D /* GroceriesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 695E6642222DC3FE00189A3D /* GroceriesUITests.m */; };
-		69EF40C522B01888002D3363 /* NBGDatabaseEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EF40C422B01888002D3363 /* NBGDatabaseEngine.m */; };
-		69EF40CC22B01B44002D3363 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EF40CA22B01B44002D3363 /* FMDB.framework */; };
-		69EF40CD22B01B45002D3363 /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EF40CB22B01B44002D3363 /* PureLayout.framework */; };
-		69EF40D322B02F71002D3363 /* NSString+NBGSQLStatements.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EF40D222B02F71002D3363 /* NSString+NBGSQLStatements.m */; };
-		69EF40D622B0329C002D3363 /* NBGDatabaseEngine+Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EF40D522B0329C002D3363 /* NBGDatabaseEngine+Debug.m */; };
-		69EF40DA22B033B6002D3363 /* NBGLibrarian.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EF40D922B033B6002D3363 /* NBGLibrarian.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,18 +49,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		690CEF7E22B37EB100AC3F8D /* NBGDatabaseEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBGDatabaseEngine.h; sourceTree = "<group>"; };
+		69129D0122CBF44D00B61A00 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		691EC3C922CD473E00AFFB38 /* AisleEntity+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AisleEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
+		691EC3CA22CD473E00AFFB38 /* AisleEntity+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AisleEntity+CoreDataClass.h"; sourceTree = "<group>"; };
+		691EC3CB22CD473E00AFFB38 /* AisleEntity+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AisleEntity+CoreDataClass.m"; sourceTree = "<group>"; };
+		691EC3CC22CD473E00AFFB38 /* AisleEntity+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AisleEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
+		691EC3CD22CD473E00AFFB38 /* ListEntity+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ListEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
+		691EC3CE22CD473E00AFFB38 /* ListEntity+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ListEntity+CoreDataClass.h"; sourceTree = "<group>"; };
+		691EC3CF22CD473E00AFFB38 /* ListEntity+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ListEntity+CoreDataClass.m"; sourceTree = "<group>"; };
+		691EC3D022CD473E00AFFB38 /* ListEntity+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ListEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
+		691EC3D122CD473E00AFFB38 /* UnitEntity+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
+		691EC3D222CD473E00AFFB38 /* UnitEntity+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitEntity+CoreDataClass.h"; sourceTree = "<group>"; };
+		691EC3D322CD473E00AFFB38 /* UnitEntity+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UnitEntity+CoreDataClass.m"; sourceTree = "<group>"; };
+		691EC3D422CD473E00AFFB38 /* UnitEntity+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UnitEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
+		691EC3D522CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EnqueuedProductEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
+		691EC3D622CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EnqueuedProductEntity+CoreDataClass.h"; sourceTree = "<group>"; };
+		691EC3D722CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "EnqueuedProductEntity+CoreDataClass.m"; sourceTree = "<group>"; };
+		691EC3D822CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "EnqueuedProductEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
+		691EC3D922CD473E00AFFB38 /* ProductEntity+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProductEntity+CoreDataProperties.h"; sourceTree = "<group>"; };
+		691EC3DA22CD473E00AFFB38 /* ProductEntity+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProductEntity+CoreDataClass.h"; sourceTree = "<group>"; };
+		691EC3DB22CD473E00AFFB38 /* ProductEntity+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ProductEntity+CoreDataClass.m"; sourceTree = "<group>"; };
+		691EC3DC22CD473E00AFFB38 /* ProductEntity+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ProductEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
 		694F697622B6A9E200C6989D /* Groceries-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Groceries-Bridging-Header.h"; sourceTree = "<group>"; };
 		694F697722B6A9E200C6989D /* ProductsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListViewController.swift; sourceTree = "<group>"; };
 		694F697922B6AF5D00C6989D /* ProductsListViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListViewStyle.swift; sourceTree = "<group>"; };
 		694F697B22B6B43000C6989D /* UICollectionViewCell+ReuseId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+ReuseId.swift"; sourceTree = "<group>"; };
-		694F697E22B6BE7A00C6989D /* sql */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sql; sourceTree = SOURCE_ROOT; };
 		694F698022B6C0BB00C6989D /* ProductsListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListCollectionViewCell.swift; sourceTree = "<group>"; };
 		694F698222B6CAB800C6989D /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
-		694F698722B827B800C6989D /* ProductsFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductsFetcher.h; path = Source/ProductsFetcher.h; sourceTree = SOURCE_ROOT; };
-		694F698822B827B800C6989D /* ProductsFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductsFetcher.m; path = Source/ProductsFetcher.m; sourceTree = SOURCE_ROOT; };
-		694F698A22B8339100C6989D /* NBGProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBGProduct.h; sourceTree = "<group>"; };
-		694F698B22B8339100C6989D /* NBGProduct.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBGProduct.m; sourceTree = "<group>"; };
 		695E661B222DC3FC00189A3D /* Groceries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groceries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695E661E222DC3FC00189A3D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		695E661F222DC3FC00189A3D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -72,17 +89,9 @@
 		695E663E222DC3FE00189A3D /* GroceriesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceriesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		695E6642222DC3FE00189A3D /* GroceriesUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroceriesUITests.m; sourceTree = "<group>"; };
 		695E6644222DC3FE00189A3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		69EF40C422B01888002D3363 /* NBGDatabaseEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBGDatabaseEngine.m; sourceTree = "<group>"; };
 		69EF40C722B01971002D3363 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		69EF40CA22B01B44002D3363 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/iOS/FMDB.framework; sourceTree = SOURCE_ROOT; };
 		69EF40CB22B01B44002D3363 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = SOURCE_ROOT; };
-		69EF40CF22B01F74002D3363 /* DatabaseEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseEngine.h; sourceTree = "<group>"; };
-		69EF40D122B02F71002D3363 /* NSString+NBGSQLStatements.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+NBGSQLStatements.h"; sourceTree = "<group>"; };
-		69EF40D222B02F71002D3363 /* NSString+NBGSQLStatements.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+NBGSQLStatements.m"; sourceTree = "<group>"; };
-		69EF40D422B0329C002D3363 /* NBGDatabaseEngine+Debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NBGDatabaseEngine+Debug.h"; sourceTree = "<group>"; };
-		69EF40D522B0329C002D3363 /* NBGDatabaseEngine+Debug.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NBGDatabaseEngine+Debug.m"; sourceTree = "<group>"; };
-		69EF40D822B033B6002D3363 /* NBGLibrarian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBGLibrarian.h; sourceTree = "<group>"; };
-		69EF40D922B033B6002D3363 /* NBGLibrarian.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBGLibrarian.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,8 +99,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69EF40CD22B01B45002D3363 /* PureLayout.framework in Frameworks */,
-				69EF40CC22B01B44002D3363 /* FMDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,15 +119,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		691EC3AA22CD46D100AFFB38 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				691EC3C922CD473E00AFFB38 /* AisleEntity+CoreDataProperties.h */,
+				691EC3CA22CD473E00AFFB38 /* AisleEntity+CoreDataClass.h */,
+				691EC3CB22CD473E00AFFB38 /* AisleEntity+CoreDataClass.m */,
+				691EC3CC22CD473E00AFFB38 /* AisleEntity+CoreDataProperties.m */,
+				691EC3CD22CD473E00AFFB38 /* ListEntity+CoreDataProperties.h */,
+				691EC3CE22CD473E00AFFB38 /* ListEntity+CoreDataClass.h */,
+				691EC3CF22CD473E00AFFB38 /* ListEntity+CoreDataClass.m */,
+				691EC3D022CD473E00AFFB38 /* ListEntity+CoreDataProperties.m */,
+				691EC3D122CD473E00AFFB38 /* UnitEntity+CoreDataProperties.h */,
+				691EC3D222CD473E00AFFB38 /* UnitEntity+CoreDataClass.h */,
+				691EC3D322CD473E00AFFB38 /* UnitEntity+CoreDataClass.m */,
+				691EC3D422CD473E00AFFB38 /* UnitEntity+CoreDataProperties.m */,
+				691EC3D522CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataProperties.h */,
+				691EC3D622CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataClass.h */,
+				691EC3D722CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataClass.m */,
+				691EC3D822CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataProperties.m */,
+				691EC3D922CD473E00AFFB38 /* ProductEntity+CoreDataProperties.h */,
+				691EC3DA22CD473E00AFFB38 /* ProductEntity+CoreDataClass.h */,
+				691EC3DB22CD473E00AFFB38 /* ProductEntity+CoreDataClass.m */,
+				691EC3DC22CD473E00AFFB38 /* ProductEntity+CoreDataProperties.m */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		694F697D22B6BBF900C6989D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				694F698E22B89EE000C6989D /* ProductsList */,
+				694F698222B6CAB800C6989D /* Palette.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		694F698E22B89EE000C6989D /* ProductsList */ = {
 			isa = PBXGroup;
 			children = (
 				694F697722B6A9E200C6989D /* ProductsListViewController.swift */,
 				694F697922B6AF5D00C6989D /* ProductsListViewStyle.swift */,
 				694F698022B6C0BB00C6989D /* ProductsListCollectionViewCell.swift */,
-				694F698222B6CAB800C6989D /* Palette.swift */,
 			);
-			path = UI;
+			path = ProductsList;
 			sourceTree = "<group>";
 		};
 		695E6612222DC3FC00189A3D = {
@@ -149,16 +191,11 @@
 		695E661D222DC3FC00189A3D /* Groceries */ = {
 			isa = PBXGroup;
 			children = (
+				691EC3AA22CD46D100AFFB38 /* CoreData */,
 				69EF40D022B02F4B002D3363 /* Extensions */,
-				69EF40C622B0188C002D3363 /* Database */,
-				69EF40DB22B0346E002D3363 /* Librarian */,
 				694F697D22B6BBF900C6989D /* UI */,
 				695E661E222DC3FC00189A3D /* AppDelegate.h */,
 				695E661F222DC3FC00189A3D /* AppDelegate.m */,
-				694F698722B827B800C6989D /* ProductsFetcher.h */,
-				694F698822B827B800C6989D /* ProductsFetcher.m */,
-				694F698A22B8339100C6989D /* NBGProduct.h */,
-				694F698B22B8339100C6989D /* NBGProduct.m */,
 			);
 			name = Groceries;
 			path = Source;
@@ -187,11 +224,11 @@
 		69EF40C122B01410002D3363 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				694F697E22B6BE7A00C6989D /* sql */,
 				694F697622B6A9E200C6989D /* Groceries-Bridging-Header.h */,
 				69EF40C722B01971002D3363 /* Cartfile */,
 				695E662C222DC3FE00189A3D /* Info.plist */,
 				695E662D222DC3FE00189A3D /* main.m */,
+				69129D0022CBF44D00B61A00 /* Model.xcdatamodeld */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -203,17 +240,6 @@
 				695E6627222DC3FE00189A3D /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		69EF40C622B0188C002D3363 /* Database */ = {
-			isa = PBXGroup;
-			children = (
-				69EF40D722B03372002D3363 /* Extensions */,
-				69EF40CF22B01F74002D3363 /* DatabaseEngine.h */,
-				690CEF7E22B37EB100AC3F8D /* NBGDatabaseEngine.h */,
-				69EF40C422B01888002D3363 /* NBGDatabaseEngine.m */,
-			);
-			path = Database;
 			sourceTree = "<group>";
 		};
 		69EF40C922B01B2D002D3363 /* Frameworks */ = {
@@ -228,29 +254,9 @@
 		69EF40D022B02F4B002D3363 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				69EF40D122B02F71002D3363 /* NSString+NBGSQLStatements.h */,
-				69EF40D222B02F71002D3363 /* NSString+NBGSQLStatements.m */,
 				694F697B22B6B43000C6989D /* UICollectionViewCell+ReuseId.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		69EF40D722B03372002D3363 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				69EF40D422B0329C002D3363 /* NBGDatabaseEngine+Debug.h */,
-				69EF40D522B0329C002D3363 /* NBGDatabaseEngine+Debug.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		69EF40DB22B0346E002D3363 /* Librarian */ = {
-			isa = PBXGroup;
-			children = (
-				69EF40D822B033B6002D3363 /* NBGLibrarian.h */,
-				69EF40D922B033B6002D3363 /* NBGLibrarian.m */,
-			);
-			path = Librarian;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,7 +269,6 @@
 				695E6617222DC3FC00189A3D /* Sources */,
 				695E6618222DC3FC00189A3D /* Frameworks */,
 				695E6619222DC3FC00189A3D /* Resources */,
-				69EF40CE22B01B5D002D3363 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -360,7 +365,6 @@
 			files = (
 				695E662B222DC3FE00189A3D /* LaunchScreen.storyboard in Resources */,
 				695E6628222DC3FE00189A3D /* Assets.xcassets in Resources */,
-				694F697F22B6BE7A00C6989D /* sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,48 +384,29 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		69EF40CE22B01B5D002D3363 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/FMDB.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/PureLayout.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FMDB.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PureLayout.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		695E6617222DC3FC00189A3D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				694F697C22B6B43000C6989D /* UICollectionViewCell+ReuseId.swift in Sources */,
-				69EF40D322B02F71002D3363 /* NSString+NBGSQLStatements.m in Sources */,
-				69EF40DA22B033B6002D3363 /* NBGLibrarian.m in Sources */,
-				69EF40D622B0329C002D3363 /* NBGDatabaseEngine+Debug.m in Sources */,
+				69129D0222CBF44D00B61A00 /* Model.xcdatamodeld in Sources */,
+				691EC3E222CD473E00AFFB38 /* UnitEntity+CoreDataProperties.m in Sources */,
+				691EC3E322CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataClass.m in Sources */,
+				691EC3E622CD473E00AFFB38 /* ProductEntity+CoreDataProperties.m in Sources */,
+				691EC3E022CD473E00AFFB38 /* ListEntity+CoreDataProperties.m in Sources */,
+				691EC3DD22CD473E00AFFB38 /* AisleEntity+CoreDataClass.m in Sources */,
 				695E662E222DC3FE00189A3D /* main.m in Sources */,
 				694F698322B6CAB800C6989D /* Palette.swift in Sources */,
-				694F698922B827B800C6989D /* ProductsFetcher.m in Sources */,
 				694F698122B6C0BB00C6989D /* ProductsListCollectionViewCell.swift in Sources */,
+				691EC3DE22CD473E00AFFB38 /* AisleEntity+CoreDataProperties.m in Sources */,
+				691EC3E422CD473E00AFFB38 /* EnqueuedProductEntity+CoreDataProperties.m in Sources */,
+				691EC3DF22CD473E00AFFB38 /* ListEntity+CoreDataClass.m in Sources */,
 				695E6620222DC3FC00189A3D /* AppDelegate.m in Sources */,
+				691EC3E122CD473E00AFFB38 /* UnitEntity+CoreDataClass.m in Sources */,
 				694F697822B6A9E200C6989D /* ProductsListViewController.swift in Sources */,
 				694F697A22B6AF5D00C6989D /* ProductsListViewStyle.swift in Sources */,
-				69EF40C522B01888002D3363 /* NBGDatabaseEngine.m in Sources */,
-				694F698C22B8339100C6989D /* NBGProduct.m in Sources */,
+				691EC3E522CD473E00AFFB38 /* ProductEntity+CoreDataClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,10 +572,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZYRA39J73U;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ".//Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -612,10 +594,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZYRA39J73U;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ".//Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -743,6 +722,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		69129D0022CBF44D00B61A00 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				69129D0122CBF44D00B61A00 /* Model.xcdatamodel */,
+			);
+			currentVersion = 69129D0122CBF44D00B61A00 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 695E6613222DC3FC00189A3D /* Project object */;
 }

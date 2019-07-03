@@ -8,22 +8,6 @@
 
 import UIKit
 
-struct ProductListCellModel {
-    let title: String
-
-    init(product: NBGProduct) {
-        title = product.name
-    }
-
-    private init(title: String) {
-        self.title = title
-    }
-
-    static func errorModel() -> ProductListCellModel {
-        return ProductListCellModel(title: "DAS ERROR")
-    }
-}
-
 final class ProductsListCollectionViewCell: UICollectionViewCell {
     private let titleLabel = UILabel()
 
@@ -33,8 +17,8 @@ final class ProductsListCollectionViewCell: UICollectionViewCell {
         applyStyle()
     }
 
-    func display(model: ProductListCellModel) {
-        titleLabel.text = model.title
+    func display(model title: String) {
+        titleLabel.text = title
     }
 
     private func configureSubviewsLayout() {

@@ -11,8 +11,7 @@ import UIKit
 final class ProductsListViewController: UIViewController {
     private let collectionView: UICollectionView
     private let layout: UICollectionViewFlowLayout
-    @objc public var productsFetcher: ProductsFetcher?
-    private var products: [ProductListCellModel]?
+    private var products = [String]()
 
     init() {
         layout = UICollectionViewFlowLayout()
@@ -31,11 +30,6 @@ final class ProductsListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
-
-        productsFetcher?.fetchProducts({ [weak self] products in
-            self?.products = products.map { ProductListCellModel(product: $0) }
-            self?.collectionView.reloadData()
-        })
     }
 
     private func configureCollectionView() {
@@ -62,8 +56,6 @@ final class ProductsListViewController: UIViewController {
         ])
     }
 
-    // MARK: - DEAD CODE
-
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -73,13 +65,13 @@ extension ProductsListViewController: UICollectionViewDelegate {}
 
 extension ProductsListViewController: UICollectionViewDataSource {
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return self.products?.count ?? 0
+        return self.products.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ProductsListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.backgroundColor = ProductsListViewStyle.cellBackgroundColor
-        cell.display(model: products?[indexPath.row] ?? ProductListCellModel.errorModel())
+        cell.display(model: products[indexPath.row])
         return cell
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="AisleEntity" representedClassName="AisleEntity" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="products" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductEntity" inverseName="aisle" inverseEntity="ProductEntity" syncable="YES"/>
+    </entity>
+    <entity name="EnqueuedProductEntity" representedClassName="EnqueuedProductEntity" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ListEntity" inverseName="products" inverseEntity="ListEntity" syncable="YES"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductEntity" inverseName="enqueuedProducts" inverseEntity="ProductEntity" syncable="YES"/>
+    </entity>
+    <entity name="ListEntity" representedClassName="ListEntity" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="products" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EnqueuedProductEntity" inverseName="list" inverseEntity="EnqueuedProductEntity" syncable="YES"/>
+    </entity>
+    <entity name="ProductEntity" representedClassName="ProductEntity" syncable="YES">
+        <attribute name="lastUsed" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="aisle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AisleEntity" inverseName="products" inverseEntity="AisleEntity" syncable="YES"/>
+        <relationship name="enqueuedProducts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EnqueuedProductEntity" inverseName="product" inverseEntity="EnqueuedProductEntity" syncable="YES"/>
+        <relationship name="unit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UnitEntity" inverseName="products" inverseEntity="UnitEntity" syncable="YES"/>
+    </entity>
+    <entity name="UnitEntity" representedClassName="UnitEntity" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="products" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductEntity" inverseName="unit" inverseEntity="ProductEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="AisleEntity" positionX="-89.5234375" positionY="-318.0546875" width="128" height="90"/>
+        <element name="EnqueuedProductEntity" positionX="-126.1328125" positionY="-164.33984375" width="128" height="120"/>
+        <element name="ListEntity" positionX="-347.796875" positionY="-329.55859375" width="128" height="105"/>
+        <element name="ProductEntity" positionX="110.3125" positionY="-119.625" width="128" height="135"/>
+        <element name="UnitEntity" positionX="-83.875" positionY="15.3828125" width="128" height="90"/>
+    </elements>
+</model>
