@@ -29,7 +29,7 @@ final class ProductsListViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated);
+        super.viewWillAppear(animated)
     }
 
     private func configureCollectionView() {
@@ -65,7 +65,7 @@ extension ProductsListViewController: UICollectionViewDelegate {}
 
 extension ProductsListViewController: UICollectionViewDataSource {
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return self.products.count
+        return products.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,8 +78,8 @@ extension ProductsListViewController: UICollectionViewDataSource {
 
 extension ProductsListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
-                        layout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+                        layout _: UICollectionViewLayout,
+                        sizeForItemAt _: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 50)
     }
 }
