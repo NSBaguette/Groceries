@@ -1,3 +1,4 @@
 # Groceries
+[![Build Status](https://travis-ci.org/NSBaguette/Groceries.svg?branch=develop)](https://travis-ci.org/NSBaguette/Groceries)
 
-WIP: Clone of 'Groceries' app
+WIP: Your ordinary 'Groceries' app
