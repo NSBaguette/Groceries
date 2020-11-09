@@ -24,7 +24,7 @@ final class ListViewController: UITableViewController {
 
     private func constructInterface() {
         view.backgroundColor = UIColor.white
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ListTableViewCell.self, forCellReuseIdentifier: "cell")
 
         let addItemHandler = #selector(addItemAction)
         addItemButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: addItemHandler)
@@ -58,17 +58,22 @@ final class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.textLabel?.text = data[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ListTableViewCell
+        cell.selectionStyle = .none
+        cell.update(with: data[indexPath.row].name)
         return cell
     }
     
     // UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let product = data[indexPath.row]
-        actor?.purchaseProduct(product: product)
+        tableView.deselectRow(at: indexPath, animated: false)
+        let cell = tableView.cellForRow(at: indexPath) as? ListTableViewCell
+        cell?.update(with: data[indexPath.row].name, selected: true, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                let product = self.data[indexPath.row]
+                self.actor?.purchaseProduct(product: product)
+            }
+        })
     }
 }
 

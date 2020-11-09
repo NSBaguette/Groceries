@@ -56,8 +56,7 @@ final class SelectProductViewController: UITableViewController {
 // MARK: Private stuff
 private extension SelectProductViewController {
     func constructInterface() {
-        tableView.register(SelectableProductCell.nib(),
-                           forCellReuseIdentifier: SelectableProductCell.reuseId())
+        tableView.register(SelectableProductCell.self, forCellReuseIdentifier: SelectableProductCell.reuseId)
         
         var action = #selector(doneButtonAction)
         doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: action)
@@ -97,17 +96,13 @@ extension SelectProductViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SelectableProductCell.reuseId()) as! SelectableProductCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SelectableProductCell.reuseId) as! SelectableProductCell
 
         guard let product = filteredData()?[indexPath.row] else {
             return cell
         }
 
-        let text = product.name
-        let state: SelectableProductCellState = product.enqueued ? .selected : .notSelected
-
-        cell.titleLabel.text = text
-        cell.updateState(to: state)
+        cell.update(state: product.enqueued ? .selected : .notSelected, title: product.name)
         return cell
     }
 

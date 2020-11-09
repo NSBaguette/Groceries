@@ -1,11 +1,3 @@
-//
-//  SelectableProductCell.swift
-//  Groceries
-//
-//  Created by Illia Akhaiev on 3/5/18.
-//  Copyright © 2018 Illia Akhaiev. All rights reserved.
-//
-
 import UIKit
 
 enum SelectableProductCellState {
@@ -14,26 +6,40 @@ enum SelectableProductCellState {
 }
 
 final class SelectableProductCell: UITableViewCell {
-    @IBOutlet var checkmark: UIImageView!
-    @IBOutlet var titleLabel: UILabel!
+    static var reuseId: String { "SelectableProductCell" }
+    private var checkmark: UIImageView
+    private var titleLabel: UILabel
 
-    private var state: SelectableProductCellState = .notSelected
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        checkmark = UIImageView(image: UIImage(named: "checkmark-empty"))
+        titleLabel = UILabel()
+        
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        checkmark.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(checkmark)
+        contentView.addSubview(titleLabel)
+        configureLayout()
 
-    override func awakeFromNib() {
-        checkmark?.image = #imageLiteral(resourceName: "checkmark-empty")
+        selectionStyle = .none
     }
-
-    func updateState(to value: SelectableProductCellState) {
-        guard state != value else {
-            return
-        }
-
-        state = value
-        updateInterface()
+        
+    func update(state: SelectableProductCellState, title: String) {
+        titleLabel.text = title
+        checkmark.image = checkmarkImage(for: state)
     }
-
-    private func updateInterface() {
-        checkmark?.image = checkmarkImage(for: state)
+    
+    private func configureLayout() {
+        NSLayoutConstraint.activate([
+            checkmark.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            checkmark.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            checkmark.widthAnchor.constraint(equalToConstant: 22),
+            checkmark.heightAnchor.constraint(equalTo: checkmark.widthAnchor, constant: 0),
+            titleLabel.leadingAnchor.constraint(equalTo: checkmark.trailingAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+        ])
     }
 
     private func checkmarkImage(for state: SelectableProductCellState) -> UIImage {
@@ -44,14 +50,8 @@ final class SelectableProductCell: UITableViewCell {
             return #imageLiteral(resourceName: "checkmark-empty")
         }
     }
-}
-
-extension SelectableProductCell {
-    static func nib() -> UINib? {
-        return UINib(nibName: "SelectableProductCell", bundle: nil)
-    }
-
-    static func reuseId() -> String {
-        return "SelectableProductCell"
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
