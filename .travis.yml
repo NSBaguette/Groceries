@@ -1,5 +1,5 @@
 osx_image: xcode12.2
 language: objective-c
 before_script:
-   - carthage bootstrap
+   - bash ./scripts/carthage-x12.sh bootstrap
 script: xcodebuild -project Groceries.xcodeproj -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
