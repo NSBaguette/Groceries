@@ -26,8 +26,8 @@ final class ClerkImpl {
 
 extension ClerkImpl: Clerk {
     func subscribe(_ consumer: ModelConsumer, for interests: Interests) {
-        if interests.contains(.groceries) {
-            addConsumer(consumer, for: .groceries)
+        if interests.contains(.enqueuedProducts) {
+            addConsumer(consumer, for: .enqueuedProducts)
         }
 
         if interests.contains(.products) {
@@ -40,13 +40,13 @@ extension ClerkImpl: Clerk {
             notifyAboutProductsUpdate()
         }
 
-        if interests.contains(.groceries) {
+        if interests.contains(.enqueuedProducts) {
             notifyAboutGroceriesUpdate()
         }
     }
 
     func updateRecords() {
-        updateRecords(about: .groceries)
+        updateRecords(about: .enqueuedProducts)
         updateRecords(about: .products)
     }
 }
@@ -57,8 +57,8 @@ extension ClerkImpl: CancellableClerk {
             remove(consumer, for: .products)
         }
 
-        if interests.contains(.groceries) {
-            remove(consumer, for: .groceries)
+        if interests.contains(.enqueuedProducts) {
+            remove(consumer, for: .enqueuedProducts)
         }
     }
 }
@@ -80,21 +80,21 @@ extension ClerkImpl {
 
     private func updateRecords(about change: ChangeType) {
         switch change {
-        case .groceries:
-            updateGroceriesRecords(notify: true)
+        case .enqueuedProducts:
+            updateEnqueuedProductsRecords(notify: true)
         case .products:
             updateProductsRecords(notify: true)
         }
     }
 
-    private func updateGroceriesRecords(notify: Bool) {
-        brain.fetchGroceries { result in
+    private func updateEnqueuedProductsRecords(notify: Bool) {
+        brain.fetchEnqueuedProducts { result in
             guard let products = result else {
                 return
             }
 
             DispatchQueue.main.async { [weak self] in
-                let changed = self?.cache.updateGroceries(products) ?? false
+                let changed = self?.cache.updateEnqueuedProducts(products) ?? false
 
                 if notify && changed {
                     self?.notifyAboutGroceriesUpdate()
@@ -120,16 +120,16 @@ extension ClerkImpl {
     }
 
     private func notifyAboutGroceriesUpdate() {
-        guard let consumers = self.consumers[.groceries] else {
+        guard let consumers = self.consumers[.enqueuedProducts] else {
             return
         }
 
         DispatchQueue.main.async { [weak self] in
-            guard let products = self?.cache.getGroceries() else {
+            guard let products = self?.cache.enqueuedProducts else {
                 return
             }
 
-            consumers.forEach { $0.consume(products, change: .groceries) }
+            consumers.forEach { $0.consume(products, change: .enqueuedProducts) }
         }
     }
 
@@ -139,7 +139,7 @@ extension ClerkImpl {
         }
 
         DispatchQueue.main.async { [weak self] in
-            guard let products = self?.cache.getProducts() else {
+            guard let products = self?.cache.products else {
                 return
             }
 

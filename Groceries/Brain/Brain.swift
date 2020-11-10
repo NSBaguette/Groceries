@@ -15,7 +15,7 @@ protocol Brain: class {
     func updateNotificationName() -> String
     func updateNotificationChangeKey() -> String
 
-    func fetchGroceries(_ handler: @escaping ([Product]?) -> Void)
+    func fetchEnqueuedProducts(_ handler: @escaping ([Product]?) -> Void)
     func fetchProducts(_ handler: @escaping ([Product]?) -> Void)
     func purchase(product: Product)
     func enqueue(product: Product)
@@ -72,8 +72,8 @@ extension BrainImpl: Brain {
         return BrainImpl.impl_updateNotificationChangeKey
     }
 
-    func fetchGroceries(_ handler: @escaping ([Product]?) -> Void) {
-        let query = phrase(for: .testGroceriesFetch)
+    func fetchEnqueuedProducts(_ handler: @escaping ([Product]?) -> Void) {
+        let query = phrase(for: .testFetchEnqueuedProducts)
         database.executeFetchBlock({ db in
             let temp = db.executeQuery(query, withArgumentsIn: [])
 
@@ -89,7 +89,7 @@ extension BrainImpl: Brain {
     }
 
     func fetchProducts(_ handler: @escaping ([Product]?) -> Void) {
-        let query = phrase(for: .testProductsFetch)
+        let query = phrase(for: .testFetchProducts)
         database.executeFetchBlock { db in
             let temp = db.executeQuery(query, withArgumentsIn: [])
 
@@ -105,19 +105,19 @@ extension BrainImpl: Brain {
     }
 
     func purchase(product: Product) {
-        let query = phrase(for: .testDelete)
+        let query = phrase(for: .testPurchaseProduct)
         database.executeUpdateBlock { [weak self] db in
             _ = db.executeUpdate(query, withArgumentsIn: [product.uid])
-            self?.reportChange(change: .groceries)
+            self?.reportChange(change: .enqueuedProducts)
             self?.reportChange(change: .products)
         }
     }
 
     func enqueue(product: Product) {
-        let query = phrase(for: .testEnqueue)
+        let query = phrase(for: .testEnqueueProduct)
         database.executeUpdateBlock { [weak self] db in
             _ = db.executeUpdate(query, withArgumentsIn: [1, product.uid])
-            self?.reportChange(change: .groceries)
+            self?.reportChange(change: .enqueuedProducts)
             self?.reportChange(change: .products)
         }
     }
@@ -130,7 +130,7 @@ extension BrainImpl: Brain {
             return
         }
 
-        let query = phrase(for: .testInsert)
+        let query = phrase(for: .testCreateNewProduct)
         database.executeUpdateBlock { [weak self] db in
             let result = db.executeUpdate(query, withArgumentsIn: [name])
             if result == false {

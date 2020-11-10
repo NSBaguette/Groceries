@@ -12,45 +12,47 @@ import FMDB
 import Foundation
 
 enum DatabaseAction: String {
-    case testGroceriesFetch = """
+    case testFetchEnqueuedProducts = """
     SELECT
-        Groceries.Name,
-        Groceries.uid,
-        1 AS Enqueued
-    FROM GroceriesLists
-    INNER JOIN Groceries
-        ON GroceriesLists.ProductID=Groceries.uid
-        WHERE GroceriesLists.ListID=1
-        ORDER BY GroceriesLists.Position
+        Products.Name,
+        Products.uid,
+        1 AS Enqueued,
+        Purchased
+    FROM ProductsLists
+    INNER JOIN Products
+        ON ProductsLists.ProductID=Products.uid
+        WHERE ProductsLists.ListID=1
+        ORDER BY ProductsLists.Position
     """
-    case testDelete = "DELETE FROM GroceriesLists WHERE ListID=1 AND ProductId = ?"
-    case testInsert = "INSERT INTO Groceries (Name) VALUES (?)"
-    case testProductsFetch = """
+    case testDequeueProduct = "DELETE FROM ProductsLists WHERE ListID=1 AND ProductId = ?"
+    case testPurchaseProduct = "UPDATE ProductsLists SET Purchased=1 WHERE ListID=1 AND ProductId = ?"
+    case testCreateNewProduct = "INSERT INTO Products (Name) VALUES (?)"
+    case testFetchProducts = """
     SELECT
         Name,
         uid,
-        CASE WHEN GroceriesLists.ProductID IS NOT NULL
+        CASE WHEN ProductsLists.ProductID IS NOT NULL
             THEN 1
             ELSE 0
         END AS Enqueued
-    FROM Groceries
-        LEFT JOIN GroceriesLists
-            ON Groceries.uid = GroceriesLists.ProductID
-            AND GroceriesLists.ListID=1
+    FROM Products
+        LEFT JOIN ProductsLists
+            ON Products.uid = ProductsLists.ProductID
+            AND ProductsLists.ListID=1
     """
-    case testEnqueue = "INSERT INTO GroceriesLists (Position, ListID, ProductId) VALUES (?, 1, ?)"
+    case testEnqueueProduct = "INSERT INTO ProductsLists (Position, ListID, ProductId, Purchased) VALUES (?, 1, ?, 0)"
     case testFetchLastInsertedGrocery = """
     SELECT
         Name,
         uid,
-        CASE WHEN GroceriesLists.ProductID IS NOT NULL
+        CASE WHEN ProductsLists.ProductID IS NOT NULL
             THEN 1
             ELSE 0
         END AS Enqueued
-    FROM Groceries
-        LEFT JOIN GroceriesLists
-            ON Groceries.uid = GroceriesLists.ProductID
-            AND GroceriesLists.ListID=1
+    FROM Products
+        LEFT JOIN ProductsLists
+            ON Products.uid = ProductsLists.ProductID
+            AND ProductsLists.ListID=1
     ORDER BY uid DESC
     LIMIT 1
     """
