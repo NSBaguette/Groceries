@@ -9,39 +9,42 @@
 import Foundation
 
 protocol ProductsCache {
-    func getProducts() -> [Product]
-    func containsProduct(product: Product) -> Bool
+    var products: [Product] { get }
+    func contains(product: Product) -> Bool
     func containsProduct(withName: String) -> Bool
     func getProduct(withName: String) -> Product?
+}
+
+protocol UpdatableProductsCache {
     func updateProducts(_ products: [Product]) -> Bool
 }
 
 final class ProductsCacheImpl: ProductsCache {
-    private var products = [Product]()
+    private var storage = [Product]()
 
-    func getProducts() -> [Product] {
-        return products
-    }
+    var products: [Product] { return storage }
 
-    func containsProduct(product: Product) -> Bool {
-        return products.contains(where: { $0.uid == product.uid })
+    func contains(product: Product) -> Bool {
+        return storage.contains(where: { $0.uid == product.uid })
     }
 
     func containsProduct(withName name: String) -> Bool {
-        return products.contains(where: { $0.name == name })
+        return storage.contains(where: { $0.name == name })
     }
 
     func getProduct(withName name: String) -> Product? {
-        let result = products.first(where: { $0.name == name })
+        let result = storage.first(where: { $0.name == name })
         return result
     }
+}
 
+extension ProductsCacheImpl: UpdatableProductsCache {
     func updateProducts(_ products: [Product]) -> Bool {
-        guard self.products != products else {
+        guard storage != products else {
             return false
         }
 
-        self.products = products
+        storage = products
         return true
     }
 }
