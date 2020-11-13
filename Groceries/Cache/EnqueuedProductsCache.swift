@@ -1,5 +1,5 @@
 //
-//  GroceriesCache.swift
+//  EnqueuedProductsCache.swift
 //  Groceries
 //
 //  Created by Illia Akhaiev on 2/27/18.
