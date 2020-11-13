@@ -18,7 +18,7 @@
 		696897211E6D653E0035E5C3 /* GroceriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696897201E6D653E0035E5C3 /* GroceriesUITests.swift */; };
 		6968C0EF204DEBF000AA567B /* SelectableProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968C0ED204DEBF000AA567B /* SelectableProductCell.swift */; };
 		6970FBA32045FDEE00F3193A /* ProductsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6970FBA22045FDEE00F3193A /* ProductsCache.swift */; };
-		6970FBA52045FE2600F3193A /* GroceriesCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6970FBA42045FE2600F3193A /* GroceriesCache.swift */; };
+		6970FBA52045FE2600F3193A /* EnqueuedProductsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6970FBA42045FE2600F3193A /* EnqueuedProductsCache.swift */; };
 		697991801FD95A5500CEC38F /* Librarian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6979917F1FD95A5500CEC38F /* Librarian.swift */; };
 		69850EE41FE06F7F00E78535 /* SelectProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69850EE31FE06F7F00E78535 /* SelectProductViewController.swift */; };
 		69850EE61FE06FE100E78535 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69850EE51FE06FE100E78535 /* Router.swift */; };
@@ -70,7 +70,7 @@
 		696897221E6D653E0035E5C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6968C0ED204DEBF000AA567B /* SelectableProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableProductCell.swift; sourceTree = "<group>"; };
 		6970FBA22045FDEE00F3193A /* ProductsCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCache.swift; sourceTree = "<group>"; };
-		6970FBA42045FE2600F3193A /* GroceriesCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceriesCache.swift; sourceTree = "<group>"; };
+		6970FBA42045FE2600F3193A /* EnqueuedProductsCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnqueuedProductsCache.swift; sourceTree = "<group>"; };
 		6979917F1FD95A5500CEC38F /* Librarian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Librarian.swift; sourceTree = "<group>"; };
 		69850EE31FE06F7F00E78535 /* SelectProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProductViewController.swift; sourceTree = "<group>"; };
 		69850EE51FE06FE100E78535 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 			children = (
 				6987943E202A21070048F663 /* Cache.swift */,
 				6970FBA22045FDEE00F3193A /* ProductsCache.swift */,
-				6970FBA42045FE2600F3193A /* GroceriesCache.swift */,
+				6970FBA42045FE2600F3193A /* EnqueuedProductsCache.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -418,7 +418,7 @@
 			files = (
 				6938A74B209E527300FA0001 /* VersionUtils.swift in Sources */,
 				698F4C481FE6B6F000925FA8 /* Interpreter.swift in Sources */,
-				6970FBA52045FE2600F3193A /* GroceriesCache.swift in Sources */,
+				6970FBA52045FE2600F3193A /* EnqueuedProductsCache.swift in Sources */,
 				69850EE61FE06FE100E78535 /* Router.swift in Sources */,
 				69AC731B201E2E2E005CE835 /* Clerk.swift in Sources */,
 				69E180522029C41200C296C6 /* Actor.swift in Sources */,

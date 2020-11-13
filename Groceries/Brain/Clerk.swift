@@ -41,7 +41,7 @@ extension ClerkImpl: Clerk {
         }
 
         if interests.contains(.enqueuedProducts) {
-            notifyAboutGroceriesUpdate()
+            notifyAboutProductsListUpdate()
         }
     }
 
@@ -97,7 +97,7 @@ extension ClerkImpl {
                 let changed = self?.cache.updateEnqueuedProducts(products) ?? false
 
                 if notify && changed {
-                    self?.notifyAboutGroceriesUpdate()
+                    self?.notifyAboutProductsListUpdate()
                 }
             }
         }
@@ -119,7 +119,7 @@ extension ClerkImpl {
         }
     }
 
-    private func notifyAboutGroceriesUpdate() {
+    private func notifyAboutProductsListUpdate() {
         guard let consumers = self.consumers[.enqueuedProducts] else {
             return
         }

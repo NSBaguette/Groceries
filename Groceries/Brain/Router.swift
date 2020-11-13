@@ -26,7 +26,7 @@ struct iOSRouter: Router {
     }
 
     func presentRootViewController(forWindow window: UIWindow) {
-        let controller = createGroceriesController()
+        let controller = createProductsListController()
         let navController = UINavigationController(rootViewController: controller)
         window.rootViewController = navController
     }
@@ -43,7 +43,7 @@ struct iOSRouter: Router {
         // TODO: find out do you need it.
     }
 
-    private func createGroceriesController() -> UIViewController {
+    private func createProductsListController() -> UIViewController {
         let controller = ListViewController(style: .grouped)
         configure(controller)
 
