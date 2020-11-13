@@ -19,6 +19,7 @@ protocol Brain: class {
     func fetchProducts(_ handler: @escaping ([Product]?) -> Void)
     func purchase(product: Product)
     func enqueue(product: Product)
+    func dequeue(product: Product)
     func createProduct(withName name: String, _ handler: @escaping (Product?) -> Void)
 }
 
@@ -115,6 +116,15 @@ extension BrainImpl: Brain {
 
     func enqueue(product: Product) {
         let query = phrase(for: .testEnqueueProduct)
+        database.executeUpdateBlock { [weak self] db in
+            _ = db.executeUpdate(query, withArgumentsIn: [1, product.uid])
+            self?.reportChange(change: .enqueuedProducts)
+            self?.reportChange(change: .products)
+        }
+    }
+    
+    func dequeue(product: Product) {
+        let query = phrase(for: .testDequeueProduct)
         database.executeUpdateBlock { [weak self] db in
             _ = db.executeUpdate(query, withArgumentsIn: [1, product.uid])
             self?.reportChange(change: .enqueuedProducts)

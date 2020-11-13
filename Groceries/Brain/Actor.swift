@@ -38,6 +38,6 @@ class ActorImpl: Actor {
     }
 
     func dequeue(product: Product) {
-        purchaseProduct(product: product)
+        brain.dequeue(product: product)
     }
 }
