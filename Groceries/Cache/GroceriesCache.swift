@@ -8,29 +8,34 @@
 
 import Foundation
 
-protocol GroceriesCache {
-    func getGroceries() -> [Product]
-    func containsGrocery(grocery: Product) -> Bool
-    func updateGroceries(_ groceries: [Product]) -> Bool
+protocol EnqueuedProductsCache {
+    var enqueuedProducts: [Product] { get }
+    func didEnqueue(_ product: Product) -> Bool
 }
 
-final class GroceriesCacheImpl: GroceriesCache {
-    private var groceries = [Product]()
+protocol UpdatableEnqueuedProductsCache {
+    func updateEnqueuedProducts(_ products: [Product]) -> Bool
+}
 
-    func getGroceries() -> [Product] {
-        return groceries
+final class EnqueuedProductsCacheImpl: EnqueuedProductsCache {
+    private var storage = [Product]()
+
+    var enqueuedProducts: [Product] {
+        return storage
     }
 
-    func containsGrocery(grocery: Product) -> Bool {
-        return groceries.contains(where: { $0.uid == grocery.uid })
+    func didEnqueue(_ product: Product) -> Bool {
+        return storage.contains(where: { $0.uid == product.uid })
     }
+}
 
-    func updateGroceries(_ groceries: [Product]) -> Bool {
-        guard self.groceries != groceries else {
+extension EnqueuedProductsCacheImpl: UpdatableEnqueuedProductsCache {
+    func updateEnqueuedProducts(_ products: [Product]) -> Bool {
+        guard storage != products else {
             return false
         }
 
-        self.groceries = groceries
+        storage = products
         return true
     }
 }

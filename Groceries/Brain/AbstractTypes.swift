@@ -14,12 +14,12 @@ import FMDB
 struct Interests: OptionSet {
     let rawValue: Int
 
-    static let groceries = Interests(rawValue: 1 << 0)
+    static let enqueuedProducts = Interests(rawValue: 1 << 0)
     static let products = Interests(rawValue: 1 << 1)
 }
 
 enum ChangeType: String {
-    case groceries = "update.groceries"
+    case enqueuedProducts = "update.enqueued.product"
     case products = "create.product"
 }
 

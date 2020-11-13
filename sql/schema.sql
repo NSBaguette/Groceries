@@ -14,7 +14,7 @@ CREATE TABLE Aisles (
         Position INTEGER
 );
 
-CREATE TABLE Groceries (
+CREATE TABLE Products (
         uid INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
         Name TEXT,
         Note TEXT,
@@ -31,12 +31,13 @@ CREATE TABLE Lists (
         Position INTEGER 
 );
 
-CREATE TABLE GroceriesLists (
+CREATE TABLE ProductsLists (
         Position INTEGER,
         ListID INTEGER,
         ProductID INTEGER,
+        Purchased INTEGER,
         FOREIGN KEY(ListID) REFERENCES Lists(uid),
-        FOREIGN KEY(ProductID) REFERENCES Groceries(uid)
+        FOREIGN KEY(ProductID) REFERENCES Products(uid)
 );
 
 CREATE TABLE InternalInformation (

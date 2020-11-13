@@ -86,7 +86,7 @@ extension ListViewController: ModelConsumer {
     }
 
     func interests() -> Interests {
-        return .groceries
+        return .enqueuedProducts
     }
 }
 

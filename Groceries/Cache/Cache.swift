@@ -10,36 +10,29 @@
 
 import Foundation
 
-protocol Cache: ProductsCache, GroceriesCache {
-}
+protocol Cache: ProductsCache, EnqueuedProductsCache { }
+protocol UpdatableCache: Cache, UpdatableProductsCache, UpdatableEnqueuedProductsCache { }
 
-protocol UpdatableCache: Cache {
-    func updateProducts(_ products: [Product]) -> Bool
-    func updateGroceries(_ groceries: [Product]) -> Bool
-}
-
-final class CacheImpl {
+final class CacheImpl: UpdatableCache {
     private let productsCache = ProductsCacheImpl()
-    private let groceriesCache = GroceriesCacheImpl()
+    private let enqueuedProductsCache = EnqueuedProductsCacheImpl()
 }
 
-extension CacheImpl: UpdatableCache {
-    func getGroceries() -> [Product] {
-        return groceriesCache.getGroceries()
-    }
+extension CacheImpl: EnqueuedProductsCache {
+    var enqueuedProducts: [Product] { return enqueuedProductsCache.enqueuedProducts }
 
-    func containsGrocery(grocery: Product) -> Bool {
-        return groceriesCache.containsGrocery(grocery: grocery)
+    func didEnqueue(_ product: Product) -> Bool {
+        return enqueuedProductsCache.didEnqueue(product)
     }
+}
 
-    func getProducts() -> [Product] {
-        return productsCache.getProducts()
+extension CacheImpl: ProductsCache {
+    var products: [Product] { return productsCache.products }
+    
+    func contains(product: Product) -> Bool {
+        return productsCache.contains(product: product)
     }
-
-    func containsProduct(product: Product) -> Bool {
-        return productsCache.containsProduct(product: product)
-    }
-
+    
     func containsProduct(withName name: String) -> Bool {
         return productsCache.containsProduct(withName: name)
     }
@@ -47,12 +40,16 @@ extension CacheImpl: UpdatableCache {
     func getProduct(withName name: String) -> Product? {
         return productsCache.getProduct(withName: name)
     }
+}
 
+extension CacheImpl: UpdatableProductsCache {
     func updateProducts(_ products: [Product]) -> Bool {
         return productsCache.updateProducts(products)
     }
+}
 
-    func updateGroceries(_ groceries: [Product]) -> Bool {
-        return groceriesCache.updateGroceries(groceries)
+extension CacheImpl: UpdatableEnqueuedProductsCache {
+    func updateEnqueuedProducts(_ products: [Product]) -> Bool {
+        return enqueuedProductsCache.updateEnqueuedProducts(products)
     }
 }

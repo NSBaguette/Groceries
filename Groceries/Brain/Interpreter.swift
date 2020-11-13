@@ -15,6 +15,7 @@ enum ProductFields: String {
     case name
     case uid
     case enqueued
+    case purchased
 }
 
 struct Interpreter {
@@ -24,7 +25,8 @@ struct Interpreter {
             guard
                 let name = fetchResult.string(for: .name),
                 let uid = fetchResult.int(for: .uid),
-                let enqueued = fetchResult.bool(for: .enqueued) else {
+                let enqueued = fetchResult.bool(for: .enqueued),
+                let purchased = fetchResult.bool(for: .purchased) else {
                 continue
             }
 
