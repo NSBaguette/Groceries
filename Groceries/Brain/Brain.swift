@@ -15,9 +15,9 @@ protocol Brain: class {
     func updateNotificationName() -> String
     func updateNotificationChangeKey() -> String
 
-    func fetchEnqueuedProducts(_ handler: @escaping ([Product]?) -> Void)
+    func fetchEnqueuedProducts(_ handler: @escaping ([EnqueuedProduct]?) -> Void)
     func fetchProducts(_ handler: @escaping ([Product]?) -> Void)
-    func purchase(product: Product)
+    func purchaseProduct(withId: ProductId)
     func enqueue(product: Product)
     func dequeue(product: Product)
     func createProduct(withName name: String, _ handler: @escaping (Product?) -> Void)
@@ -73,7 +73,7 @@ extension BrainImpl: Brain {
         return BrainImpl.impl_updateNotificationChangeKey
     }
 
-    func fetchEnqueuedProducts(_ handler: @escaping ([Product]?) -> Void) {
+    func fetchEnqueuedProducts(_ handler: @escaping ([EnqueuedProduct]?) -> Void) {
         let query = phrase(for: .testFetchEnqueuedProducts)
         database.executeFetchBlock({ db in
             let temp = db.executeQuery(query, withArgumentsIn: [])
@@ -84,7 +84,7 @@ extension BrainImpl: Brain {
                 return
             }
 
-            let products = Interpreter.interpretProducts(result)
+            let products = Interpreter.interpretEnqueuedProducts(result)
             BrainImpl.callback(param: products, handler)
         })
     }
@@ -105,10 +105,10 @@ extension BrainImpl: Brain {
         }
     }
 
-    func purchase(product: Product) {
+    func purchaseProduct(withId uid: ProductId) {
         let query = phrase(for: .testPurchaseProduct)
         database.executeUpdateBlock { [weak self] db in
-            _ = db.executeUpdate(query, withArgumentsIn: [product.uid])
+            _ = db.executeUpdate(query, withArgumentsIn: [uid])
             self?.reportChange(change: .enqueuedProducts)
             self?.reportChange(change: .products)
         }

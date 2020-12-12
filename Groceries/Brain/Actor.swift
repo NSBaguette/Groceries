@@ -29,8 +29,8 @@ class ActorImpl: Actor {
         }
     }
 
-    func purchaseProduct(product: Product) {
-        brain.purchase(product: product)
+    func purchaseProduct(withId uid: ProductId) {
+        brain.purchaseProduct(withId: uid)
     }
 
     func enqueue(product: Product) {

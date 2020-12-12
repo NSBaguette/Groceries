@@ -19,7 +19,7 @@ final class CacheImpl: UpdatableCache {
 }
 
 extension CacheImpl: EnqueuedProductsCache {
-    var enqueuedProducts: [Product] { return enqueuedProductsCache.enqueuedProducts }
+    var enqueuedProducts: [EnqueuedProduct] { return enqueuedProductsCache.enqueuedProducts }
 
     func didEnqueue(_ product: Product) -> Bool {
         return enqueuedProductsCache.didEnqueue(product)
@@ -49,7 +49,7 @@ extension CacheImpl: UpdatableProductsCache {
 }
 
 extension CacheImpl: UpdatableEnqueuedProductsCache {
-    func updateEnqueuedProducts(_ products: [Product]) -> Bool {
+    func updateEnqueuedProducts(_ products: [EnqueuedProduct]) -> Bool {
         return enqueuedProductsCache.updateEnqueuedProducts(products)
     }
 }

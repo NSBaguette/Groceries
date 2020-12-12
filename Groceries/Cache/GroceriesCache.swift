@@ -1,5 +1,5 @@
 //
-//  EnqueuedProductsCache.swift
+//  GroceriesCache.swift
 //  Groceries
 //
 //  Created by Illia Akhaiev on 2/27/18.
@@ -9,18 +9,18 @@
 import Foundation
 
 protocol EnqueuedProductsCache {
-    var enqueuedProducts: [Product] { get }
+    var enqueuedProducts: [EnqueuedProduct] { get }
     func didEnqueue(_ product: Product) -> Bool
 }
 
 protocol UpdatableEnqueuedProductsCache {
-    func updateEnqueuedProducts(_ products: [Product]) -> Bool
+    func updateEnqueuedProducts(_ products: [EnqueuedProduct]) -> Bool
 }
 
 final class EnqueuedProductsCacheImpl: EnqueuedProductsCache {
-    private var storage = [Product]()
+    private var storage = [EnqueuedProduct]()
 
-    var enqueuedProducts: [Product] {
+    var enqueuedProducts: [EnqueuedProduct] {
         return storage
     }
 
@@ -30,7 +30,7 @@ final class EnqueuedProductsCacheImpl: EnqueuedProductsCache {
 }
 
 extension EnqueuedProductsCacheImpl: UpdatableEnqueuedProductsCache {
-    func updateEnqueuedProducts(_ products: [Product]) -> Bool {
+    func updateEnqueuedProducts(_ products: [EnqueuedProduct]) -> Bool {
         guard storage != products else {
             return false
         }

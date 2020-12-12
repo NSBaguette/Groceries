@@ -1,13 +1,3 @@
-//
-//  Interpreter.swift
-//  Groceries
-//
-//  Translates raw data from db into model objects.
-//
-//  Created by Illia Akhaiev on 12/17/17.
-//  Copyright © 2017 Illia Akhaiev. All rights reserved.
-//
-
 import FMDB
 import Foundation
 
@@ -25,8 +15,7 @@ struct Interpreter {
             guard
                 let name = fetchResult.string(for: .name),
                 let uid = fetchResult.int(for: .uid),
-                let enqueued = fetchResult.bool(for: .enqueued),
-                let purchased = fetchResult.bool(for: .purchased) else {
+                let enqueued = fetchResult.bool(for: .enqueued) else {
                 continue
             }
 
@@ -34,8 +23,22 @@ struct Interpreter {
             result.append(product)
         }
 
-        if result.count == 0 {
-            return [Product]()
+        return result
+    }
+    
+    static func interpretEnqueuedProducts(_ fetchResult: FMResultSet) -> [EnqueuedProduct] {
+        var result = [EnqueuedProduct]()
+        while fetchResult.next() {
+            guard
+                let name = fetchResult.string(for: .name),
+                let uid = fetchResult.int(for: .uid),
+                let enqueued = fetchResult.bool(for: .enqueued),
+                let purchased = fetchResult.bool(for: .purchased) else {
+                continue
+            }
+
+            let product = EnqueuedProduct(uid: uid, name: name, enqueued: enqueued, purchased: purchased)
+            result.append(product)
         }
 
         return result

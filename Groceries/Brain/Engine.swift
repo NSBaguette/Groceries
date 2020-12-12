@@ -17,7 +17,7 @@ enum DatabaseAction: String {
         Products.Name,
         Products.uid,
         1 AS Enqueued,
-        Purchased
+        ProductsLists.Purchased
     FROM ProductsLists
     INNER JOIN Products
         ON ProductsLists.ProductID=Products.uid

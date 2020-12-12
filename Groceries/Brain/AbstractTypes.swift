@@ -73,7 +73,7 @@ protocol Engine {
 
 protocol Actor {
     func createProduct(name: String)
-    func purchaseProduct(product: Product)
+    func purchaseProduct(withId: ProductId)
     func enqueue(product: Product)
     func dequeue(product: Product)
 }

@@ -13,7 +13,7 @@ final class ListViewController: UITableViewController {
     private var addItemButton: UIBarButtonItem!
     private var shareButton: UIBarButtonItem!
     
-    private var data = [Product]()
+    private var data = [EnqueuedProduct]()
     private var router: Router?
     private var actor: Actor?
 
@@ -59,8 +59,11 @@ final class ListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ListTableViewCell
+        let product = data[indexPath.row]
+        
         cell.selectionStyle = .none
-        cell.update(with: data[indexPath.row].name)
+        cell.update(with: product.name, selected: product.purchased, completion: nil)
+        
         return cell
     }
     
@@ -71,7 +74,7 @@ final class ListViewController: UITableViewController {
         cell?.update(with: data[indexPath.row].name, selected: true, completion: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 let product = self.data[indexPath.row]
-                self.actor?.purchaseProduct(product: product)
+                self.actor?.purchaseProduct(withId: product.uid)
             }
         })
     }
@@ -79,7 +82,7 @@ final class ListViewController: UITableViewController {
 
 extension ListViewController: ModelConsumer {
     func consume(_ model: [Any], change _: ChangeType) {
-        if let products = model as? [Product] {
+        if let products = model as? [EnqueuedProduct] {
             data = products
             tableView.reloadData()
         }
