@@ -24,7 +24,7 @@ enum DatabaseAction: String {
         WHERE ProductsLists.ListID=1
         ORDER BY ProductsLists.Position
     """
-    case testDequeueProduct = "DELETE FROM ProductsLists WHERE ListID=1 AND ProductId = ?"
+    case testDequeueProduct = "DELETE FROM ProductsLists WHERE ListID = ? AND ProductId = ?"
     case testPurchaseProduct = "UPDATE ProductsLists SET Purchased=1 WHERE ListID=1 AND ProductId = ?"
     case testCreateNewProduct = "INSERT INTO Products (Name) VALUES (?)"
     case testFetchProducts = """
